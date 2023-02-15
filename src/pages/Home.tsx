@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import Header from "../components/Header/Header";
+import Logo from "../components/Header/Logo";
+import Button from "../components/Header/Button";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -7,11 +10,11 @@ export default function Home() {
   return (
     <>
       <Header>
-        <Logo>App Name</Logo>
-        <HeaderContainer>
+        <Logo />
+        <ButtonsContainer>
           <Button onClick={() => navigate("/sign-up")}>Sign Up</Button>
           <Button onClick={() => navigate("/login")}>Log In</Button>
-        </HeaderContainer>
+        </ButtonsContainer>
       </Header>
       <Container>
         <Card>
@@ -88,60 +91,11 @@ export default function Home() {
   );
 }
 
-const Header = styled.div`
-  height: 62px;
-  width: 100vw;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 0 16px;
-
-  position: fixed;
-  top: 0;
-
-  background-color: #1f1e1f;
-`;
-
-const Logo = styled.h1`
-  font-family: DM Sans;
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 28px;
-
-  color: #fff;
-
-  user-select: none;
-`;
-
-const HeaderContainer = styled.div`
+const ButtonsContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 8px;
-`;
-
-const Button = styled.div`
-  height: 30px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  padding: 4px 12px;
-
-  font-family: DM Sans;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 24px;
-
-  background-color: #ff695b;
-  color: #f3f4f7;
-
-  border-radius: 8px;
-
-  cursor: pointer;
 `;
 
 const Container = styled.div`
