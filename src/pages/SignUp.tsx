@@ -1,16 +1,30 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import styled from "styled-components";
 import Button from "../components/Header/Button";
 import Header from "../components/Header/Header";
 import Logo from "../components/Header/Logo";
+import { signUp } from "../services/SignUpApi";
 
 export default function SignUp() {
   const [signUpInfo, setSignUpInfo] = useState({
     email: "",
     fullName: "",
     password: "",
-    passwordConfirmation: "",
   });
+
+  const navigate = useNavigate();
+
+  async function submit() {
+    try {
+      await signUp(signUpInfo.email, signUpInfo.fullName, signUpInfo.password);
+      toast("sucessfully sign");
+      navigate("/login");
+    } catch (error) {
+      toast("it wasn't able to complete sign in");
+    }
+  }
 
   return (
     <>
@@ -19,7 +33,7 @@ export default function SignUp() {
       </Header>
       <Container>
         <StyledH1>Sign Up</StyledH1>
-        <StyledForm>
+        <StyledForm onSubmit={submit}>
           <StyledInput
             placeholder="full name"
             type={"text"}
@@ -51,14 +65,16 @@ export default function SignUp() {
           >
             Sign Up
           </Button>
+          <HR />
         </StyledForm>
+        <StyledLink to="/login">Already have an account? Login</StyledLink>
       </Container>
     </>
   );
 }
 
 const Container = styled.div`
-  height: 100vh;
+  height: calc(100vh - 60px);
   width: 100vw;
 
   margin-top: 60px;
@@ -77,8 +93,8 @@ const StyledH1 = styled.div`
   font-family: "DM Sans";
   text-align: center;
 
-  margin-top: 12vh;
-  margin-bottom: 24px;
+  padding-top: 24vh;
+  padding-bottom: 24px;
 `;
 
 const StyledForm = styled.form`
@@ -109,5 +125,26 @@ const StyledInput = styled.input`
 
   &:focus {
     outline: none;
+  }
+`;
+
+const HR = styled.hr`
+  width: 100%;
+
+  border-top: 1px solid #6e6e6e;
+`;
+
+const StyledLink = styled(Link)`
+  font-family: "DM Sans";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #6e6e6e;
+
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    color: #2f2f2f;
   }
 `;
