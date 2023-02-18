@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 interface Props {
   children: string;
-  onClick: () => void;
+  onClick?: () => void;
   width?: string;
   type?: string;
 }
