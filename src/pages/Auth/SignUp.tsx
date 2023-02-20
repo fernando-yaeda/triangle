@@ -28,7 +28,7 @@ export default function SignUp() {
     try {
       await signUp(signUpInfo.email, signUpInfo.fullName, signUpInfo.password);
       toast.success("Congratulations! You have successfully signed up.");
-      navigate("/dashboard");
+      navigate("/login");
     } catch (error) {
       toast.error("Oops! Something went wrong. Please try again later.");
     }

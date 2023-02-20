@@ -27,7 +27,7 @@ export default function Login() {
     try {
       await login(loginInfo.email, loginInfo.password);
       toast.success("You have successfully logged in. Enjoy your experience!");
-      navigate("/dashboard");
+      navigate("/home");
     } catch (error) {
       toast.error("Incorrect username or password. Please try again.");
     }
