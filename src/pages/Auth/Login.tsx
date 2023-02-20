@@ -27,7 +27,7 @@ export default function Login() {
     try {
       await login(loginInfo.email, loginInfo.password);
       toast.success("You have successfully logged in. Enjoy your experience!");
-      navigate("/login");
+      navigate("/dashboard");
     } catch (error) {
       toast.error("Incorrect username or password. Please try again.");
     }
@@ -57,11 +57,7 @@ export default function Login() {
               setLoginInfo({ ...loginInfo, password: e.target.value })
             }
           />
-          <Button
-            type="submit"
-            width="100%"
-            onClick={() => console.log(loginInfo)}
-          >
+          <Button type="submit" width="100%">
             Login
           </Button>
           <HorizontalLine />
