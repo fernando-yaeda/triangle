@@ -4,7 +4,7 @@ import Header from "../components/Header/Header";
 import Logo from "../components/Header/Logo";
 import Button from "../components/Header/Button";
 
-export default function Home() {
+export default function HomePage() {
   const navigate = useNavigate();
 
   return (
