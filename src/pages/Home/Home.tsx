@@ -1,6 +1,11 @@
 import styled from "styled-components";
+import dayjs from "dayjs";
 
 export default function Home() {
+  const day = dayjs().format("DD").toLocaleLowerCase();
+  const weekday = dayjs().format("dddd").toLocaleLowerCase();
+  const month = dayjs().format("MMMM").toLocaleLowerCase();
+
   return (
     <Container>
       <LateralMenu>
@@ -11,7 +16,10 @@ export default function Home() {
 
       <HomeContainer>
         <Header>
-          <Date>monday, february 20 </Date> <br />
+          <Date>
+            {weekday}, {month} {day}
+          </Date>
+          <br />
           <Greeting>good evening, fernando</Greeting>
         </Header>
 
