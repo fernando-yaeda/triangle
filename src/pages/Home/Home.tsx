@@ -1,10 +1,8 @@
 import styled from "styled-components";
-import dayjs from "dayjs";
+import { generateDate } from "../../utils/generate-date";
 
 export default function Home() {
-  const day = dayjs().format("DD").toLocaleLowerCase();
-  const weekday = dayjs().format("dddd").toLocaleLowerCase();
-  const month = dayjs().format("MMMM").toLocaleLowerCase();
+  const date = generateDate();
 
   return (
     <Container>
@@ -16,9 +14,7 @@ export default function Home() {
 
       <HomeContainer>
         <Header>
-          <Date>
-            {weekday}, {month} {day}
-          </Date>
+          <Date>{date}</Date>
           <br />
           <Greeting>good evening, fernando</Greeting>
         </Header>
