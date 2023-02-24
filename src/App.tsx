@@ -6,19 +6,24 @@ import SignUp from "./pages/Auth/SignUp";
 import Login from "./pages/Auth/Login";
 import Home from "./pages/Home/Home";
 
+import { UserDataProvider } from "./contexts/UserContext";
+
 function App() {
   return (
     <>
       <ToastContainer />
 
-      <Router>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/home" element={<Home />} />
-        </Routes>
-      </Router>
+      <UserDataProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/sign-up" element={<SignUp />} />
+            <Route path="/login" element={<Login />} />
+
+            <Route path="/home" element={<Home />} />
+          </Routes>
+        </Router>
+      </UserDataProvider>
     </>
   );
 }

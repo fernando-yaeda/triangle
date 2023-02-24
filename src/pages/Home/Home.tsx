@@ -1,7 +1,13 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import UserDataContext, {
+  UserDataContextType,
+} from "../../contexts/UserContext";
 import { generateDate } from "../../utils/generate-date";
 
 export default function Home() {
+  const { userData } = useContext(UserDataContext) as UserDataContextType;
+
   const date = generateDate();
 
   return (
@@ -16,7 +22,7 @@ export default function Home() {
         <Header>
           <Date>{date}</Date>
           <br />
-          <Greeting>good evening, fernando</Greeting>
+          <Greeting>good evening, {userData.fullName}</Greeting>
         </Header>
 
         <CardsContainer>

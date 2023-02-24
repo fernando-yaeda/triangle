@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Button from "../../components/Header/Button";
@@ -13,6 +13,9 @@ import {
   Title,
 } from "../../components/Auth/index";
 import { login } from "../../services/Login";
+import UserDataContext, {
+  UserDataContextType,
+} from "../../contexts/UserContext";
 
 export default function Login() {
   const [loginInfo, setLoginInfo] = useState({
@@ -20,13 +23,20 @@ export default function Login() {
     password: "",
   });
 
+  const { setUserData } = useContext(UserDataContext) as UserDataContextType;
+
   const navigate = useNavigate();
 
   async function submit(event: FormEvent) {
     event.preventDefault();
+
     try {
-      await login(loginInfo.email, loginInfo.password);
+      const userData = await login(loginInfo.email, loginInfo.password);
+
+      setUserData(userData.user);
+
       toast.success("You have successfully logged in. Enjoy your experience!");
+
       navigate("/home");
     } catch (error) {
       toast.error("Incorrect username or password. Please try again.");
