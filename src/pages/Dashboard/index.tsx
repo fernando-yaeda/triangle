@@ -1,11 +1,12 @@
 import { useContext } from "react";
 import styled from "styled-components";
+import CardItem from "../../components/Dashboard/CardItem";
 import UserDataContext, {
   UserDataContextType,
 } from "../../contexts/UserContext";
 import { generateDate } from "../../utils/generate-date";
 
-export default function Home() {
+export default function Dashboard() {
   const { userData } = useContext(UserDataContext) as UserDataContextType;
 
   const date = generateDate();
@@ -13,9 +14,9 @@ export default function Home() {
   return (
     <Container>
       <LateralMenu>
-        <LateralMenuItem>Home</LateralMenuItem>
-        <LateralMenuItem>My Tasks</LateralMenuItem>
-        <LateralMenuItem>Projects</LateralMenuItem>
+        <LateralMenuItem>home</LateralMenuItem>
+        <LateralMenuItem>my tasks</LateralMenuItem>
+        <LateralMenuItem>projects</LateralMenuItem>
       </LateralMenu>
 
       <HomeContainer>
@@ -29,17 +30,11 @@ export default function Home() {
           <CardWrapper>
             <Card>
               <CardHeader>
-                <CardTitle>CardTitle</CardTitle>
-                <CardNav>CardNav</CardNav>
+                <CardTitle>Projects</CardTitle>
               </CardHeader>
-            </Card>
-          </CardWrapper>
-          <CardWrapper>
-            <Card>
-              <CardHeader>
-                <CardTitle>CardTitle</CardTitle>
-                <CardNav>CardNav</CardNav>
-              </CardHeader>
+              <CardBody>
+                <CardItem isProject={false}>create project</CardItem>
+              </CardBody>
             </Card>
           </CardWrapper>
         </CardsContainer>
@@ -156,7 +151,7 @@ const CardsContainer = styled.div`
   width: 100%;
 
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   flex-wrap: wrap;
 
   padding: 0 32px;
@@ -178,33 +173,39 @@ const Card = styled.div`
   border-radius: 12px;
 
   background-color: #2f2f2f;
+
+  border: 1px solid transparent;
+
+  &:hover {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
 `;
 
 const CardHeader = styled.div`
-  height: 80px;
   width: 100%;
 
   padding: 12px 24px;
 `;
 
 const CardTitle = styled.div`
-  height: 60%;
   width: 100%;
 
   font-family: "DM Sans";
   font-weight: 500;
   font-size: 18px;
-  color: #ffffff;
+  color: #e4e4e4;
 `;
 
-const CardNav = styled.div`
-  height: 40%;
+const CardBody = styled.div`
   width: 100%;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  padding: 12px 24px;
 
   font-family: "DM Sans";
   font-weight: 500;
-  font-size: 14px;
-  color: #ffffff;
-
-  border-bottom: 1px solid #ffff;
+  font-size: 16px;
+  color: #c5c5c5;
 `;

@@ -16,6 +16,7 @@ import { login } from "../../services/Login";
 import UserDataContext, {
   UserDataContextType,
 } from "../../contexts/UserContext";
+import AuthContext, { AuthContextType } from "../../contexts/AuthContext";
 
 export default function Login() {
   const [loginInfo, setLoginInfo] = useState({
@@ -24,6 +25,7 @@ export default function Login() {
   });
 
   const { setUserData } = useContext(UserDataContext) as UserDataContextType;
+  const { setAuthenticated } = useContext(AuthContext) as AuthContextType;
 
   const navigate = useNavigate();
 
@@ -34,11 +36,14 @@ export default function Login() {
       const userData = await login(loginInfo.email, loginInfo.password);
 
       setUserData(userData.user);
+      setAuthenticated(true);
+      localStorage.setItem("token", JSON.stringify(userData.token));
 
       toast.success("You have successfully logged in. Enjoy your experience!");
 
-      navigate("/home");
+      navigate("/dashboard");
     } catch (error) {
+      console.log(error);
       toast.error("Incorrect username or password. Please try again.");
     }
   }
