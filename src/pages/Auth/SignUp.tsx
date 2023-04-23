@@ -1,23 +1,23 @@
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import {
+    Container,
+    Form,
+    HorizontalLine,
+    Input,
+    Link,
+    Title,
+} from "../../components/Auth/index";
 import Button from "../../components/Header/Button";
 import Header from "../../components/Header/Header";
 import Logo from "../../components/Header/Logo";
-import {
-  Container,
-  Form,
-  HorizontalLine,
-  Input,
-  Link,
-  Title,
-} from "../../components/Auth/index";
 import { signUp } from "../../services/SignUp";
 
 export default function SignUp() {
   const [signUpInfo, setSignUpInfo] = useState({
     email: "",
-    fullName: "",
+    username: "",
     password: "",
   });
 
@@ -26,7 +26,7 @@ export default function SignUp() {
   async function submit(event: FormEvent) {
     event.preventDefault();
     try {
-      await signUp(signUpInfo.email, signUpInfo.fullName, signUpInfo.password);
+      await signUp(signUpInfo.email, signUpInfo.username, signUpInfo.password);
       toast.success("Congratulations! You have successfully signed up.");
       navigate("/login");
     } catch (error) {
@@ -45,9 +45,9 @@ export default function SignUp() {
           <Input
             placeholder="full name"
             type="text"
-            value={signUpInfo.fullName}
+            value={signUpInfo.username}
             onChange={(e) =>
-              setSignUpInfo({ ...signUpInfo, fullName: e.target.value })
+              setSignUpInfo({ ...signUpInfo, username: e.target.value })
             }
           />
           <Input

@@ -2,7 +2,7 @@ import { useContext } from "react";
 import styled from "styled-components";
 import CardItem from "../../components/Dashboard/CardItem";
 import UserDataContext, {
-  UserDataContextType,
+    UserDataContextType,
 } from "../../contexts/UserContext";
 import { generateDate } from "../../utils/generate-date";
 
@@ -23,7 +23,7 @@ export default function Dashboard() {
         <Header>
           <Date>{date}</Date>
           <br />
-          <Greeting>good evening, {userData.fullName}</Greeting>
+          <Greeting>good evening, {userData.username}</Greeting>
         </Header>
 
         <CardsContainer>

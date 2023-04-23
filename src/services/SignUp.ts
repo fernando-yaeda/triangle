@@ -2,12 +2,12 @@ import api from "./api";
 
 export async function signUp(
   email: string,
-  fullName: string,
+  username: string,
   password: string
 ) {
   const response = await api.post("/users", {
     email,
-    fullName,
+    username,
     password,
   });
 

@@ -1,9 +1,9 @@
-import { createContext, PropsWithChildren, ReactNode } from "react";
+import { createContext, ReactNode } from "react";
 import { useLocalStorage } from "usehooks-ts";
 
 interface IUserData {
   userId: string;
-  fullName: string;
+  username: string;
   email: string;
 }
 
@@ -23,7 +23,7 @@ export default UserDataContext;
 export function UserDataProvider({ children }: Props) {
   const [userData, setUserData] = useLocalStorage<IUserData>("userData", {
     userId: "",
-    fullName: "",
+    username: "",
     email: "",
   });
 
