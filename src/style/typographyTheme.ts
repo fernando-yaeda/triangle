@@ -62,95 +62,88 @@ declare module "@mui/material/Typography" {
 
 export const typography = createTheme({
   typography: {
+    fontFamily: ["Inter", "sans-serif"].join(","),
     displayLg: {
       fontSize: "32px",
       fontWeight: 500,
       lineHeight: "40px",
-      letterSpacing: "-1%",
     },
     displayMd: {
       fontSize: "26px",
       fontWeight: 500,
       lineHeight: "34px",
-      letterSpacing: "-1%",
     },
     headingLg: {
       fontSize: "24px",
       fontWeight: 500,
       lineHeight: "32px",
-      letterSpacing: "-1%",
     },
     headingMd: {
       fontSize: "20px",
       fontWeight: 500,
       lineHeight: "28px",
-      letterSpacing: "-1%",
     },
     headingSm: {
       fontSize: "18px",
       fontWeight: 500,
       lineHeight: "24px",
-      letterSpacing: "-1%",
     },
     textXl: {
       fontSize: "18px",
       fontWeight: 500,
       lineHeight: "26px",
-      letterSpacing: "-1%",
     },
     textLg: {
       fontSize: "16px",
       fontWeight: 500,
       lineHeight: "24px",
-      letterSpacing: "-1%",
     },
     textMd: {
       fontSize: "15px",
       fontWeight: 500,
       lineHeight: "23px",
-      letterSpacing: "-1%",
     },
     textSm: {
       fontSize: "14px",
       fontWeight: 500,
       lineHeight: "24px",
-      letterSpacing: "-1%",
     },
     textXs: {
       fontSize: "13px",
       fontWeight: 500,
       lineHeight: "21px",
-      letterSpacing: "-1%",
     },
     textXlRegular: {
       fontSize: "18px",
-      fontWeight: 500,
+      fontWeight: 400,
       lineHeight: "26px",
-      letterSpacing: "-1%",
     },
     textLgRegular: {
       fontSize: "16px",
-      fontWeight: 500,
+      fontWeight: 400,
       lineHeight: "24px",
-      letterSpacing: "-1%",
     },
     textMdRegular: {
       fontSize: "15px",
-      fontWeight: 500,
+      fontWeight: 400,
       lineHeight: "23px",
-      letterSpacing: "-1%",
     },
     textSmRegular: {
       fontSize: "14px",
-      fontWeight: 500,
+      fontWeight: 400,
       lineHeight: "24px",
-      letterSpacing: "-1%",
     },
     textXsRegular: {
       fontSize: "13px",
-      fontWeight: 500,
+      fontWeight: 400,
       lineHeight: "21px",
-      letterSpacing: "-1%",
+    },
+  },
+  components: {
+    MuiTypography: {
+      defaultProps: {
+        fontFamily: ["Inter", "sans-serif"].join(","),
+      },
     },
   },
 });
