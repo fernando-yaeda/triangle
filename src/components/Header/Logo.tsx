@@ -1,18 +1,29 @@
+import { Typography } from "@mui/material";
 import styled from "styled-components";
+import logo from "../../assets/logo.png";
 
 function Logo() {
-  return <StyledLogo>AppName</StyledLogo>;
+  return (
+    <Container>
+      <LogoImage src={logo} alt="logo" />
+      <Typography variant="headingMd">Triangle</Typography>
+    </Container>
+  );
 }
 
-const StyledLogo = styled.h1`
-  font-family: DM Sans;
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 28px;
-
-  color: #fff;
+const Container = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: center;
 
   user-select: none;
+`;
+
+const LogoImage = styled.img`
+  height: 30px;
+  width: 30px;
+
+  margin-right: 8px;
 `;
 
 export default Logo;
