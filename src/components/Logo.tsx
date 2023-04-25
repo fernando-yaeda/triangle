@@ -16,8 +16,6 @@ const Container = styled.div`
   align-items: center;
 
   user-select: none;
-  margin-top: 24px;
-  margin-left: 80px;
 `;
 
 const LogoImage = styled.img`
