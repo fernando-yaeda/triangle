@@ -1,48 +1,54 @@
-import "react-toastify/dist/ReactToastify.css";
 import {
-  BrowserRouter as Router,
   Navigate,
   Route,
+  BrowserRouter as Router,
   Routes,
 } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import HomePage from "./pages/HomePage";
-import SignUp from "./pages/Auth/SignUp";
+import "react-toastify/dist/ReactToastify.css";
 import Login from "./pages/Auth/Login";
+import SignUp from "./pages/Auth/SignUp";
 import Dashboard from "./pages/Dashboard";
+import HomePage from "./pages/HomePage";
 
-import { UserDataProvider } from "./contexts/UserContext";
+import { ReactElement, useContext } from "react";
+import { ThemeProvider } from "styled-components";
 import AuthContext, {
   AuthContextProvider,
   AuthContextType,
 } from "./contexts/AuthContext";
-import { ReactElement, useContext } from "react";
+import { UserDataProvider } from "./contexts/UserContext";
+import GlobalStyle from "./styles/globalStyle";
+import { theme } from "./styles/theme";
 
 function App() {
   return (
     <>
-      <ToastContainer />
+      <GlobalStyle />
+      <ThemeProvider theme={theme}>
+        <ToastContainer />
 
-      <UserDataProvider>
-        <AuthContextProvider>
-          <Router>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/sign-up" element={<SignUp />} />
-              <Route path="/login" element={<Login />} />
+        <UserDataProvider>
+          <AuthContextProvider>
+            <Router>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/sign-up" element={<SignUp />} />
+                <Route path="/login" element={<Login />} />
 
-              <Route
-                path="/dashboard"
-                element={
-                  <ProtectedRouteGuard>
-                    <Dashboard />
-                  </ProtectedRouteGuard>
-                }
-              ></Route>
-            </Routes>
-          </Router>
-        </AuthContextProvider>
-      </UserDataProvider>
+                <Route
+                  path="/dashboard"
+                  element={
+                    <ProtectedRouteGuard>
+                      <Dashboard />
+                    </ProtectedRouteGuard>
+                  }
+                ></Route>
+              </Routes>
+            </Router>
+          </AuthContextProvider>
+        </UserDataProvider>
+      </ThemeProvider>
     </>
   );
 }
