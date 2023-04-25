@@ -1,20 +1,15 @@
-import { Typography } from "@mui/material";
 import styled from "styled-components";
-import { theme } from "../style/theme";
 
-const colors = theme.palette.primary;
-
-interface Props {
+interface ButtonProps {
   children: string;
   onClick?: () => void;
   width?: string;
-  type?: string;
 }
 
-export default function Button({ children, onClick, width }: Props) {
+export default function Button({ children = "", onClick, width }: ButtonProps) {
   return (
     <StyledButton style={{ width }} onClick={onClick}>
-      <Typography variant={"textSm"}>{children}</Typography>
+      <Text>{children}</Text>
     </StyledButton>
   );
 }
@@ -26,10 +21,10 @@ const StyledButton = styled.button`
   justify-content: center;
   align-items: center;
 
-  padding: 4px 12px;
+  padding: 8px 16px;
 
-  background-color: ${colors.black};
-  color: ${colors.white};
+  background-color: ${(props) => props.theme.black};
+  color: ${(props) => props.theme.white};
 
   border: none;
   border-radius: 6px;
@@ -37,7 +32,13 @@ const StyledButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: ${colors.mediumGrey};
-    color: ${colors.darkGrey};
+    background-color: ${(props) => props.theme.mediumGray};
+    color: ${(props) => props.theme.darkGray};
   }
+`;
+
+const Text = styled.span`
+  font-size: ${(props) => props.theme.textMd.fontSize};
+  line-height: ${(props) => props.theme.textMd.lineHeight};
+  font-weight: 500;
 `;
