@@ -1,5 +1,7 @@
 import { UserCircle } from "@phosphor-icons/react";
 import styled from "styled-components";
+import facebookLogo from "../assets/facebook-logo.png";
+import googleLogo from "../assets/google-logo.png";
 import Button from "../components/Button/index";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
@@ -13,8 +15,14 @@ export default function HomePage() {
         <UserCircle size={110} />
         <Text>Sign in to Triangle</Text>
         <Text>Dont have an account? Sign Up</Text>
-        <Button width="100%">Sign up with Google</Button>
-        <Button width="100%">Sign up with Facebook</Button>
+        <Button width="100%" variant="whiteAndGrey">
+          <img src={googleLogo} alt="google logo" />
+          Sign up with Google
+        </Button>
+        <Button width="100%" variant="whiteAndGrey">
+          <img src={facebookLogo} alt="facebook logo" />
+          Sign up with Facebook
+        </Button>
       </Auth>
       <Footer />
     </Container>
