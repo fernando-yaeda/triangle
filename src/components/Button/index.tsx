@@ -1,8 +1,9 @@
+import { ReactNode } from "react";
 import { theme } from "../../styles/theme";
 import * as S from "./styles";
 
 interface ButtonProps {
-  children: string;
+  children: ReactNode;
   onClick?: () => void;
   width?: string;
   variant?: keyof typeof S.variants;

@@ -33,6 +33,14 @@ export const Button = styled.button<ButtonProps>`
   }) => css`
     width: ${width};
 
+    position: relative;
+
+    img {
+      height: 20px;
+      position: absolute;
+      left: 16px;
+    }
+
     display: flex;
     justify-content: center;
     align-items: center;
