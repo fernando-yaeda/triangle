@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Text } from "./Text";
 
 interface ButtonProps {
   children: string;
@@ -32,13 +33,7 @@ const StyledButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: ${(props) => props.theme.mediumGray};
-    color: ${(props) => props.theme.darkGray};
+    background-color: ${(props) => props.theme.mediumGrey};
+    color: ${(props) => props.theme.darkGrey};
   }
-`;
-
-const Text = styled.span`
-  font-size: ${(props) => props.theme.textMd.fontSize};
-  line-height: ${(props) => props.theme.textMd.lineHeight};
-  font-weight: 500;
 `;

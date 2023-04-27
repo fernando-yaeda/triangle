@@ -1,11 +1,14 @@
 import styled from "styled-components";
 import logo from "../assets/logo.png";
+import { Text } from "./Text";
 
 export default function Logo() {
   return (
     <Container>
       <LogoImage src={logo} alt="logo image" />
-      <LogoText>Triangle</LogoText>
+      <Text color="black" variant="headingLg">
+        Triangle
+      </Text>
     </Container>
   );
 }
@@ -23,11 +26,4 @@ const LogoImage = styled.img`
   width: 30px;
 
   margin-right: 8px;
-`;
-
-const LogoText = styled.span`
-  color: ${(props) => props.theme.black};
-  font-size: ${(props) => props.theme.headingLg.fontSize};
-  line-height: ${(props) => props.theme.headingLg.lineHeight};
-  font-weight: 600;
 `;
