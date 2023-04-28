@@ -4,7 +4,7 @@ import { z } from "zod";
 import { Button } from "../../Button";
 import * as S from "./styles";
 
-const signUpFormSchema = z.object({
+const signInFormSchema = z.object({
   email: z
     .string()
     .nonempty("email field should not be empty")
@@ -13,18 +13,18 @@ const signUpFormSchema = z.object({
   password: z.string(),
 });
 
-type SignUpFormData = z.infer<typeof signUpFormSchema>;
+type SignInFormData = z.infer<typeof signInFormSchema>;
 
-export default function SignUpForm() {
+export default function SignInForm() {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<SignUpFormData>({
-    resolver: zodResolver(signUpFormSchema),
+  } = useForm<SignInFormData>({
+    resolver: zodResolver(signInFormSchema),
   });
 
-  const handleSubmitData = async (data: SignUpFormData) => {
+  const handleSubmitData = async (data: SignInFormData) => {
     console.log("submit", data);
   };
 

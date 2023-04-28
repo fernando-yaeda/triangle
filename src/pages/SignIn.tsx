@@ -1,7 +1,7 @@
 import { UserCircle } from "@phosphor-icons/react";
 import styled from "styled-components";
 import AuthContainer from "../components/Auth";
-import SignUpForm from "../components/Auth/Forms/SignUpForm";
+import SignInForm from "../components/Auth/Forms/SignInForm";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
 
@@ -16,7 +16,7 @@ export default function SignIn() {
         hasOAuth={true}
         hasDivider={true}
       >
-        <SignUpForm />
+        <SignInForm />
       </AuthContainer>
       <Footer />
     </Container>
