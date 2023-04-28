@@ -46,3 +46,11 @@ export const Input = styled.input`
     transition: none;
   }
 `;
+
+export const ErrorText = styled.span`
+  color: ${(props) => props.theme.colors.purple};
+  font-size: ${(props) => props.theme.fontVariants.textSm.fontSize};
+  line-height: ${(props) => props.theme.fontVariants.textSm.lineHeight};
+
+  align-self: flex-start;
+`;
