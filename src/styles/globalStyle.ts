@@ -7,6 +7,10 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     font-family: "Inter", sans-serif;
     transition: ease 0.3s;
+
+    &::selection {
+      background-color: #FBE4E1
+    }
   }
 `;
 
