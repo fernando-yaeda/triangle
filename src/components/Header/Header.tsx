@@ -10,8 +10,8 @@ function Header() {
     <Container>
       <Logo />
       <ButtonsContainer>
-        <Button onClick={() => navigate("/sign-up")}>Explore Features</Button>
-        <Button onClick={() => navigate("/login")}>Get Started</Button>
+        <Button onClick={() => navigate("/")}>Explore Features</Button>
+        <Button onClick={() => navigate("/")}>Get Started</Button>
       </ButtonsContainer>
     </Container>
   );
