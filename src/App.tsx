@@ -16,6 +16,7 @@ import AuthContext, {
 } from "./contexts/AuthContext";
 import { UserDataProvider } from "./contexts/UserContext";
 import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 import GlobalStyle from "./styles/globalStyle";
 import { theme } from "./styles/theme";
 
@@ -31,6 +32,7 @@ function App() {
             <Router>
               <Routes>
                 <Route path="/" element={<SignIn />} />
+                <Route path="/sign-up" element={<SignUp />} />
 
                 <Route
                   path="/dashboard"
