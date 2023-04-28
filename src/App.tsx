@@ -7,7 +7,6 @@ import {
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Dashboard from "./pages/Dashboard";
-import HomePage from "./pages/HomePage";
 
 import { ReactElement, useContext } from "react";
 import { ThemeProvider } from "styled-components";
@@ -16,6 +15,7 @@ import AuthContext, {
   AuthContextType,
 } from "./contexts/AuthContext";
 import { UserDataProvider } from "./contexts/UserContext";
+import SignIn from "./pages/SignIn";
 import GlobalStyle from "./styles/globalStyle";
 import { theme } from "./styles/theme";
 
@@ -30,7 +30,7 @@ function App() {
           <AuthContextProvider>
             <Router>
               <Routes>
-                <Route path="/" element={<HomePage />} />
+                <Route path="/" element={<SignIn />} />
 
                 <Route
                   path="/dashboard"

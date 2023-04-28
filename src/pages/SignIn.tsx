@@ -5,7 +5,7 @@ import SignUpForm from "../components/Auth/Forms/SignUpForm";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
 
-export default function HomePage() {
+export default function SignIn() {
   return (
     <Container>
       <Header />
