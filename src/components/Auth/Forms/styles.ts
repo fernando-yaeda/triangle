@@ -47,10 +47,58 @@ export const Input = styled.input`
   }
 `;
 
+export const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16px;
+`;
+
+export const MultipleInputsContainer = styled.div`
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+`;
+
 export const ErrorText = styled.span`
   color: ${(props) => props.theme.colors.purple};
   font-size: ${(props) => props.theme.fontVariants.textSm.fontSize};
   line-height: ${(props) => props.theme.fontVariants.textSm.lineHeight};
 
   align-self: flex-start;
+`;
+
+export const CheckboxContainer = styled.div`
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  padding-left: 20px;
+
+  position: relative;
+
+  label {
+    font-size: ${(props) => props.theme.fontVariants.textSm.fontSize};
+    line-height: ${(props) => props.theme.fontVariants.textSm.lineHeight};
+  }
+
+  span {
+    margin-left: -20px;
+  }
+`;
+
+export const Checkbox = styled.input`
+  cursor: pointer;
+  background-color: red;
+
+  position: absolute;
+  top: 4px;
+  left: 0;
 `;
