@@ -9,6 +9,7 @@ interface ButtonProps {
   variant?: keyof typeof S.variants;
   fontVariant?: keyof typeof theme.fontVariants;
   type?: "button" | "submit";
+  disabled?: boolean;
 }
 
 export function Button({
@@ -18,6 +19,7 @@ export function Button({
   variant,
   fontVariant,
   type = "button",
+  disabled = false,
 }: ButtonProps) {
   return (
     <S.Button
@@ -26,6 +28,7 @@ export function Button({
       fontVariant={fontVariant}
       onClick={onClick && onClick}
       type={type}
+      disabled={disabled}
     >
       {children}
     </S.Button>
