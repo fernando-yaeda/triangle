@@ -6,8 +6,6 @@ import {
 } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Login from "./pages/Auth/Login";
-import SignUp from "./pages/Auth/SignUp";
 import Dashboard from "./pages/Dashboard";
 import HomePage from "./pages/HomePage";
 
@@ -33,8 +31,6 @@ function App() {
             <Router>
               <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/sign-up" element={<SignUp />} />
-                <Route path="/login" element={<Login />} />
 
                 <Route
                   path="/dashboard"
