@@ -8,21 +8,24 @@ interface ButtonProps {
   width?: string;
   variant?: keyof typeof S.variants;
   fontVariant?: keyof typeof theme.fontVariants;
+  type?: "button" | "submit";
 }
 
-export default function Button({
+export function Button({
   children,
   onClick,
   width,
   variant,
   fontVariant,
+  type = "button",
 }: ButtonProps) {
   return (
     <S.Button
       width={width}
       variant={variant}
       fontVariant={fontVariant}
-      onClick={onClick}
+      onClick={onClick && onClick}
+      type={type}
     >
       {children}
     </S.Button>
