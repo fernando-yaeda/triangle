@@ -12,11 +12,8 @@ export default function Footer() {
 }
 
 const Container = styled.footer`
-  height: 76px;
+  height: 80px;
   width: 100%;
-
-  position: absolute;
-  bottom: 0;
 
   display: flex;
   justify-content: center;
