@@ -10,7 +10,7 @@ const signInFormSchema = z.object({
     .nonempty("email field should not be empty")
     .email("email field should have a valid email address")
     .toLowerCase(),
-  password: z.string(),
+  password: z.string().nonempty("password field should not be empty"),
 });
 
 type SignInFormData = z.infer<typeof signInFormSchema>;
