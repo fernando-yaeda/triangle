@@ -67,9 +67,6 @@ export default function SignUpForrm() {
             placeholder="First Name"
             type="text"
           />
-          {errors.firstName && (
-            <S.ErrorText>• {errors.firstName.message}</S.ErrorText>
-          )}
         </S.InputContainer>
 
         <S.InputContainer>
@@ -80,11 +77,18 @@ export default function SignUpForrm() {
             placeholder="Last Name"
             type="text"
           />
+        </S.InputContainer>
+      </S.MultipleInputsContainer>
+      {(errors.firstName || errors.lastName) && (
+        <S.MultipleInputsErrors>
+          {errors.firstName && (
+            <S.ErrorText>• {errors.firstName.message}</S.ErrorText>
+          )}
           {errors.lastName && (
             <S.ErrorText>• {errors.lastName.message}</S.ErrorText>
           )}
-        </S.InputContainer>
-      </S.MultipleInputsContainer>
+        </S.MultipleInputsErrors>
+      )}
 
       <S.Label htmlFor="email">Email Address</S.Label>
       <S.Input

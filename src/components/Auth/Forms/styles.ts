@@ -64,6 +64,16 @@ export const MultipleInputsContainer = styled.div`
   gap: 16px;
 `;
 
+export const MultipleInputsErrors = styled.div`
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16px;
+`;
+
 export const ErrorText = styled.span`
   color: ${(props) => props.theme.colors.purple};
   font-size: ${(props) => props.theme.fontVariants.textSm.fontSize};
