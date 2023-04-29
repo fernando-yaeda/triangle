@@ -1,8 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Button } from "../../Button";
-import * as S from "./styles";
+import * as S from "../../../components/Auth/Forms/styles";
+import { Button } from "../../../components/Button";
 
 const signInFormSchema = z.object({
   firstName: z

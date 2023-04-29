@@ -1,9 +1,9 @@
 import { UserCircle } from "@phosphor-icons/react";
 import styled from "styled-components";
-import AuthContainer from "../components/Auth";
-import SignInForm from "../components/Auth/Forms/SignInForm";
-import Footer from "../components/Footer/Footer";
-import Header from "../components/Header/Header";
+import AuthContainer from "../../components/Auth";
+import Footer from "../../components/Footer/Footer";
+import Header from "../../components/Header/Header";
+import SignInForm from "./components/SignInForm";
 
 export default function SignIn() {
   return (
