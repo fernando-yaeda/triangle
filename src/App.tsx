@@ -1,7 +1,7 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Dashboard from "./pages/Home";
+import Home from "./pages/Home";
 
 import { ThemeProvider } from "styled-components";
 import { AuthContextProvider } from "./contexts/AuthContext";
@@ -25,7 +25,7 @@ function App() {
                 <Route path="/" element={<SignIn />} />
                 <Route path="/sign-up" element={<SignUp />} />
 
-                <Route path="/dashboard" element={<Dashboard />}></Route>
+                <Route path="/home" element={<Home />}></Route>
               </Routes>
             </Router>
           </AuthContextProvider>
