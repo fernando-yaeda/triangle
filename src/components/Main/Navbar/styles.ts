@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   height: 100%;
-  width: 288px;
+  min-width: 288px;
 
   background-color: ${(props) => props.theme.colors.lightGrey};
 

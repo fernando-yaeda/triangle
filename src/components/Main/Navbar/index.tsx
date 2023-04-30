@@ -9,7 +9,7 @@ import {
 } from "@phosphor-icons/react";
 import { ReactNode } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import Logo from "../Logo";
+import Logo from "../../Logo";
 import * as S from "./styles";
 
 export default function Navbar() {
