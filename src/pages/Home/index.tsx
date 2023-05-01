@@ -8,19 +8,30 @@ export default function Home() {
   return (
     <Container>
       <Navbar />
-      <Header />
-      <ContentWrapper></ContentWrapper>
+      <Main>
+        <Header />
+        <ContentWrapper></ContentWrapper>
+      </Main>
     </Container>
   );
 }
 
 const Container = styled.div`
-  min-height: 100vh;
-  width: 100vw;
+  height: 100vh;
+  width: 100%;
 
   display: flex;
 
   background-color: ${(props) => props.theme.colors.white};
+`;
+
+const Main = styled.div`
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const ContentWrapper = styled.div`
@@ -30,4 +41,7 @@ const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  align-items: center;
+
+  margin-top: 76px;
 `;
