@@ -2,18 +2,21 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   height: 100%;
-  min-width: 288px;
-
-  background-color: ${(props) => props.theme.colors.lightGrey};
-
-  padding: 24px 24px;
-
-  border-right: 1px solid ${(props) => props.theme.colors.mediumGrey};
+  width: 288px;
 
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+
+  padding: 24px 24px;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  background-color: ${(props) => props.theme.colors.lightGrey};
+  border-right: 1px solid ${(props) => props.theme.colors.mediumGrey};
 `;
 
 export const Navbar = styled.nav`
@@ -25,6 +28,9 @@ export const Navbar = styled.nav`
   justify-content: flex-start;
   align-items: flex-start;
   gap: 14px;
+
+  position: sticky;
+  top: 0;
 
   padding: 44px 0;
 `;

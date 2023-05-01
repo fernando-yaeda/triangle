@@ -1,12 +1,16 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 100%;
+  width: calc(100% - 288px);
   height: 76px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  position: fixed;
+  top: 0;
+  left: 288px;
 
   padding: 0px 92px;
 
