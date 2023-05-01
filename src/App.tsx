@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import { ThemeProvider } from "styled-components";
 import { AuthContextProvider } from "./contexts/AuthContext";
 import { UserDataProvider } from "./contexts/UserContext";
+import Dashboard from "./pages/Dashboard";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import GlobalStyle from "./styles/globalStyle";
@@ -25,7 +26,8 @@ function App() {
                 <Route path="/" element={<SignIn />} />
                 <Route path="/sign-up" element={<SignUp />} />
 
-                <Route path="/home" element={<Home />}></Route>
+                <Route path="/home" element={<Home />} />
+                <Route path="/dashboard" element={<Dashboard />} />
               </Routes>
             </Router>
           </AuthContextProvider>
