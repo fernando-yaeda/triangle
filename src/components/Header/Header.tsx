@@ -39,6 +39,7 @@ const Container = styled.header<{ scrollY: number }>`
 
   position: fixed;
   top: 0;
+  z-index: 1;
 
   background-color: ${(props) => props.theme.colors.white};
 
