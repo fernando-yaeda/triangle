@@ -49,7 +49,7 @@ const signInFormSchema = z.object({
   offer: z.boolean(),
 });
 
-type SignInFormData = z.infer<typeof signInFormSchema>;
+type SignUpFormData = z.infer<typeof signInFormSchema>;
 
 export default function SignUpForm() {
   const navigate = useNavigate();
@@ -58,18 +58,18 @@ export default function SignUpForm() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<SignInFormData>({
+  } = useForm<SignUpFormData>({
     resolver: zodResolver(signInFormSchema),
   });
 
-  const handleSubmitData = async (data: SignInFormData) => {
+  const handleSubmitData = async (data: SignUpFormData) => {
     try {
       await AuthService.signUp(data);
       toast.success("You have successfully signed up!");
       navigate("/");
     } catch (error: any) {
       if (error.response?.data?.message) {
-        return toast.error(error.response.data.message[0]);
+        return toast.error(error.response.data.message);
       }
       return toast.error(
         "Oops... something went wrong. Please try again later"
