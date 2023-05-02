@@ -1,4 +1,5 @@
 import { UserCircle } from "@phosphor-icons/react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import AuthContainer from "../../components/Auth";
 import Footer from "../../components/Footer/Footer";
@@ -12,9 +13,12 @@ export default function SignIn() {
       <AuthContainer
         icon={<UserCircle size={110} />}
         title="Sign in to Triangle"
-        subtitle="Don't have an account? Sign Up"
-        hasOAuth={true}
-        hasDivider={true}
+        subtitle={
+          <>
+            {"Don't have an account? "}
+            <Link to="/sign-up">Sign Up</Link>
+          </>
+        }
       >
         <SignInForm />
       </AuthContainer>
