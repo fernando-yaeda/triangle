@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { z } from "zod";
 import * as S from "../../../components/Auth/Forms/styles";
 import { Button } from "../../../components/Button";
-import { signUp } from "../../../services/SignUp";
+import AuthService from "../../../services/AuthService";
 
 const signInFormSchema = z.object({
   firstName: z
@@ -64,12 +64,12 @@ export default function SignUpForm() {
 
   const handleSubmitData = async (data: SignInFormData) => {
     try {
-      await signUp(data);
+      await AuthService.signUp(data);
       toast.success("You have successfully signed up!");
       navigate("/");
     } catch (error: any) {
-      if (error.response.data.message) {
-        return toast.error(error.response.data.message);
+      if (error.response?.data?.message) {
+        return toast.error(error.response.data.message[0]);
       }
       return toast.error(
         "Oops... something went wrong. Please try again later"
@@ -160,7 +160,7 @@ export default function SignUpForm() {
 
       {isSubmitting ? (
         <Button
-          // disabled={isSubmitting}
+          disabled={isSubmitting}
           variant="whiteAndGrey"
           type="submit"
           width="100%"
