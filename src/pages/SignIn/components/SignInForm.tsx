@@ -1,8 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { z } from "zod";
 import * as S from "../../../components/Auth/Forms/styles";
 import { Button } from "../../../components/Button";
+import AuthService from "../../../services/AuthService";
 
 const signInFormSchema = z.object({
   email: z
@@ -16,6 +19,8 @@ const signInFormSchema = z.object({
 type SignInFormData = z.infer<typeof signInFormSchema>;
 
 export default function SignInForm() {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -25,7 +30,18 @@ export default function SignInForm() {
   });
 
   const handleSubmitData = async (data: SignInFormData) => {
-    console.log("submit", data);
+    try {
+      await AuthService.signIn(data);
+      toast.success("You have successfully signed up!");
+      navigate("/home");
+    } catch (error: any) {
+      if (error.response?.data?.message) {
+        return toast.error(error.response.data.message);
+      }
+      return toast.error(
+        "Oops... something went wrong. Please try again later"
+      );
+    }
   };
 
   return (
