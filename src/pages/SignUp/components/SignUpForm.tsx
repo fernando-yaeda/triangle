@@ -1,8 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { z } from "zod";
 import * as S from "../../../components/Auth/Forms/styles";
 import { Button } from "../../../components/Button";
+import { signUp } from "../../../services/SignUp";
 
 const signInFormSchema = z.object({
   firstName: z
@@ -29,6 +32,11 @@ const signInFormSchema = z.object({
         })
         .join(" ");
     }),
+  username: z
+    .string()
+    .nonempty("username field should not be empty")
+    .min(6, "username must be longet than 6 characters")
+    .max(16, "username must be shorter than 16 characters"),
   email: z
     .string()
     .nonempty("email field should not be empty")
@@ -43,7 +51,9 @@ const signInFormSchema = z.object({
 
 type SignInFormData = z.infer<typeof signInFormSchema>;
 
-export default function SignUpForrm() {
+export default function SignUpForm() {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -53,7 +63,18 @@ export default function SignUpForrm() {
   });
 
   const handleSubmitData = async (data: SignInFormData) => {
-    console.log("submit", data);
+    try {
+      await signUp(data);
+      toast.success("You have successfully signed up!");
+      navigate("/");
+    } catch (error: any) {
+      if (error.response.data.message) {
+        return toast.error(error.response.data.message);
+      }
+      return toast.error(
+        "Oops... something went wrong. Please try again later"
+      );
+    }
   };
 
   return (
@@ -88,6 +109,17 @@ export default function SignUpForrm() {
             <S.ErrorText>• {errors.lastName.message}</S.ErrorText>
           )}
         </S.MultipleInputsErrors>
+      )}
+
+      <S.Label htmlFor="username">Username</S.Label>
+      <S.Input
+        {...register("username")}
+        id="username"
+        placeholder="username"
+        type="username"
+      />
+      {errors.username && (
+        <S.ErrorText>• {errors.username.message}</S.ErrorText>
       )}
 
       <S.Label htmlFor="email">Email Address</S.Label>
@@ -128,12 +160,12 @@ export default function SignUpForrm() {
 
       {isSubmitting ? (
         <Button
-          disabled={isSubmitting}
+          // disabled={isSubmitting}
           variant="whiteAndGrey"
           type="submit"
           width="100%"
         >
-          Login
+          Register Now
         </Button>
       ) : (
         <Button type="submit" width="100%">

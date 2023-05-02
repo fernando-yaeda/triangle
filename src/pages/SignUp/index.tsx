@@ -3,7 +3,7 @@ import styled from "styled-components";
 import AuthContainer from "../../components/Auth";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
-import SignUpForrm from "./components/SignUpForm";
+import SignUpForm from "./components/SignUpForm";
 
 export default function SignUp() {
   return (
@@ -16,7 +16,7 @@ export default function SignUp() {
         hasOAuth={true}
         hasDivider={true}
       >
-        <SignUpForrm />
+        <SignUpForm />
       </AuthContainer>
       <Footer />
     </Container>

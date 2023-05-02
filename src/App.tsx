@@ -15,10 +15,9 @@ import { theme } from "./styles/theme";
 function App() {
   return (
     <>
+      <ToastContainer />
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <ToastContainer />
-
         <UserDataProvider>
           <AuthContextProvider>
             <Router>
