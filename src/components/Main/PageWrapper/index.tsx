@@ -10,8 +10,8 @@ interface PageWrapperProps {
 export function PageWrapper({ children }: PageWrapperProps) {
   return (
     <S.Container>
-      <Navbar />
       <S.Main>
+        <Navbar />
         <Header />
         <S.ContentWrapper>{children}</S.ContentWrapper>
       </S.Main>

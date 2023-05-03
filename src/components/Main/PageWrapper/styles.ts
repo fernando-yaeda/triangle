@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
 
   display: flex;
@@ -20,7 +20,7 @@ export const Main = styled.div`
 
 export const ContentWrapper = styled.div`
   height: 100%;
-  width: 100%;
+  width: calc(100% - 288px);
 
   display: flex;
   flex-direction: column;
@@ -28,4 +28,6 @@ export const ContentWrapper = styled.div`
   align-items: center;
 
   margin-top: 76px;
+  margin-left: 288px;
+  padding: 18px 92px;
 `;
