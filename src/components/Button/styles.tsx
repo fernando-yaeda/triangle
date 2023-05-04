@@ -17,12 +17,21 @@ export const variants = {
     boxShadow:
       "rgba(0, 0, 0, 0.05) 0px 0px 2px 0px, rgba(0, 0, 0, 0.1) 0px 0px 0px 1px",
   },
+  purple: {
+    bgColor: theme.colors.lightBlue,
+    color: theme.colors.purple,
+    hoverBgColor: theme.colors.purple,
+    hoverColor: theme.colors.lightBlue,
+    boxShadow:
+      "rgba(0, 0, 0, 0.05) 0px 0px 2px 0px, rgba(0, 0, 0, 0.1) 0px 0px 0px 1px",
+  },
 };
 
 interface ButtonProps {
   width?: string;
   variant?: keyof typeof variants;
   fontVariant?: keyof typeof theme.fontVariants;
+  gap?: string;
 }
 
 export const Button = styled.button<ButtonProps>`
@@ -30,6 +39,7 @@ export const Button = styled.button<ButtonProps>`
     width = "auto",
     variant = "blackAndWhite",
     fontVariant = "textMd",
+    gap = "0px",
   }) => css`
     width: ${width};
 
@@ -44,6 +54,7 @@ export const Button = styled.button<ButtonProps>`
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: ${gap};
 
     padding: 8px 16px;
 
@@ -65,5 +76,7 @@ export const Button = styled.button<ButtonProps>`
     }
 
     box-shadow: ${variants[variant].boxShadow};
+
+    transition: ease 0.3s;
   `}
 `;

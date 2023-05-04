@@ -10,6 +10,7 @@ interface ButtonProps {
   fontVariant?: keyof typeof theme.fontVariants;
   type?: "button" | "submit";
   disabled?: boolean;
+  gap?: string;
 }
 
 export function Button({
@@ -20,6 +21,7 @@ export function Button({
   fontVariant,
   type = "button",
   disabled = false,
+  gap,
 }: ButtonProps) {
   return (
     <S.Button
@@ -29,6 +31,7 @@ export function Button({
       onClick={onClick && onClick}
       type={type}
       disabled={disabled}
+      gap={gap}
     >
       {children}
     </S.Button>
