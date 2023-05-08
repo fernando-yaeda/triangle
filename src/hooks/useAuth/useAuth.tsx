@@ -56,10 +56,10 @@ export function AuthProvider({
     setLoading(true);
 
     await AuthService.signIn({ email, password })
-      .then((user) => {
-        setUser(user);
-        setItem("token", JSON.stringify(user.accessToken));
-        setItem("user", JSON.stringify(user));
+      .then((response) => {
+        setUser(response.user);
+        setItem("user", JSON.stringify(response.user));
+        setItem("token", JSON.stringify(response.token));
         toast.success("You have successfully signed in!");
         return navigate("/home");
       })
