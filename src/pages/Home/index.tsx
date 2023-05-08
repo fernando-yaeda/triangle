@@ -6,10 +6,8 @@ import { SetUpAccountCard } from "./components/SetupAccountCard";
 import { TasksCard } from "./components/TasksCard";
 
 export default function Home() {
-  // const { userData } = useContext(UserDataContext) as UserDataContextType;
-
   return (
-    <PageWrapper>
+    <PageWrapper currentPage="Home">
       <Container>
         <Row>
           <SetUpAccountCard />
