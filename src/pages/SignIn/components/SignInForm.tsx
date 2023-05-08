@@ -1,11 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import { z } from "zod";
 import * as S from "../../../components/Auth/Forms/styles";
 import { Button } from "../../../components/Button";
-import AuthService from "../../../services/AuthService";
+import useAuth from "../../../hooks/useAuth/useAuth";
 
 const signInFormSchema = z.object({
   email: z
@@ -16,32 +14,21 @@ const signInFormSchema = z.object({
   password: z.string().nonempty("password field should not be empty"),
 });
 
-type SignInFormData = z.infer<typeof signInFormSchema>;
+export type SignInFormData = z.infer<typeof signInFormSchema>;
 
 export default function SignInForm() {
-  const navigate = useNavigate();
+  const { signIn, loading } = useAuth();
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<SignInFormData>({
     resolver: zodResolver(signInFormSchema),
   });
 
   const handleSubmitData = async (data: SignInFormData) => {
-    try {
-      await AuthService.signIn(data);
-      toast.success("You have successfully signed up!");
-      navigate("/home");
-    } catch (error: any) {
-      if (error.response?.data?.message) {
-        return toast.error(error.response.data.message);
-      }
-      return toast.error(
-        "Oops... something went wrong. Please try again later"
-      );
-    }
+    await signIn(data);
   };
 
   return (
@@ -64,9 +51,9 @@ export default function SignInForm() {
       {errors.password && (
         <S.ErrorText>• {errors.password.message}</S.ErrorText>
       )}
-      {isSubmitting ? (
+      {loading ? (
         <Button
-          disabled={isSubmitting}
+          disabled={loading}
           variant="whiteAndGrey"
           type="submit"
           width="100%"

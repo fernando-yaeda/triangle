@@ -1,11 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import { z } from "zod";
 import * as S from "../../../components/Auth/Forms/styles";
 import { Button } from "../../../components/Button";
-import AuthService from "../../../services/AuthService";
+import useAuth from "../../../hooks/useAuth/useAuth";
 
 const signInFormSchema = z.object({
   firstName: z
@@ -52,29 +50,18 @@ const signInFormSchema = z.object({
 type SignUpFormData = z.infer<typeof signInFormSchema>;
 
 export default function SignUpForm() {
-  const navigate = useNavigate();
+  const { signUp, loading } = useAuth();
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<SignUpFormData>({
     resolver: zodResolver(signInFormSchema),
   });
 
   const handleSubmitData = async (data: SignUpFormData) => {
-    try {
-      await AuthService.signUp(data);
-      toast.success("You have successfully signed up!");
-      navigate("/");
-    } catch (error: any) {
-      if (error.response?.data?.message) {
-        return toast.error(error.response.data.message);
-      }
-      return toast.error(
-        "Oops... something went wrong. Please try again later"
-      );
-    }
+    signUp(data);
   };
 
   return (
@@ -158,9 +145,9 @@ export default function SignUpForm() {
         </S.Label>
       </S.CheckboxContainer>
 
-      {isSubmitting ? (
+      {loading ? (
         <Button
-          disabled={isSubmitting}
+          disabled={loading}
           variant="whiteAndGrey"
           type="submit"
           width="100%"
