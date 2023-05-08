@@ -5,14 +5,15 @@ import * as S from "./styles";
 
 interface PageWrapperProps {
   children: ReactNode;
+  currentPage: string;
 }
 
-export function PageWrapper({ children }: PageWrapperProps) {
+export function PageWrapper({ children, currentPage }: PageWrapperProps) {
   return (
     <S.Container>
       <S.Main>
         <Navbar />
-        <Header />
+        <Header currentPage={currentPage} />
         <S.ContentWrapper>{children}</S.ContentWrapper>
       </S.Main>
     </S.Container>

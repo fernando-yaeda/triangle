@@ -5,7 +5,7 @@ interface PageNavigatorProps {
   pageName: string;
 }
 
-export function PageNavigator({ pageName = "Home" }: PageNavigatorProps) {
+export function PageNavigator({ pageName }: PageNavigatorProps) {
   return (
     <S.Container>
       <Text color="darkGrey" variant="textXl">

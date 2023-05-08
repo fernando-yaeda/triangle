@@ -3,10 +3,14 @@ import { PageNavigator } from "./PageNavigator";
 import { SearchBar } from "./SearchBar";
 import * as S from "./styles";
 
-export default function Header() {
+type HeaderProps = {
+  currentPage: string;
+};
+
+export default function Header({ currentPage }: HeaderProps) {
   return (
     <S.Container>
-      <PageNavigator pageName="Home" />
+      <PageNavigator pageName={currentPage} />
       <SearchBar />
       <Menu />
     </S.Container>
