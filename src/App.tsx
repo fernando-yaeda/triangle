@@ -1,11 +1,15 @@
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import {
+  Navigate,
+  Route,
+  BrowserRouter as Router,
+  Routes,
+} from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Home from "./pages/Home";
 
 import { ThemeProvider } from "styled-components";
-import { AuthContextProvider } from "./contexts/AuthContext";
-import { UserDataProvider } from "./contexts/UserContext";
+import useAuth, { AuthProvider } from "./hooks/useAuth/useAuth";
 import Dashboard from "./pages/Dashboard";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
@@ -18,36 +22,43 @@ function App() {
       <ToastContainer />
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <UserDataProvider>
-          <AuthContextProvider>
-            <Router>
-              <Routes>
-                <Route path="/" element={<SignIn />} />
-                <Route path="/sign-up" element={<SignUp />} />
+        <Router>
+          <AuthProvider>
+            <Routes>
+              <Route path="/" element={<SignIn />} />
+              <Route path="/sign-up" element={<SignUp />} />
 
-                <Route path="/home" element={<Home />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-              </Routes>
-            </Router>
-          </AuthContextProvider>
-        </UserDataProvider>
+              <Route
+                path="/home"
+                element={
+                  <ProtectedRouteGuard>
+                    <Home />
+                  </ProtectedRouteGuard>
+                }
+              />
+              <Route
+                path="/dashboard"
+                element={
+                  <ProtectedRouteGuard>
+                    <Dashboard />
+                  </ProtectedRouteGuard>
+                }
+              />
+            </Routes>
+          </AuthProvider>
+        </Router>
       </ThemeProvider>
     </>
   );
 }
 
-// interface Props {
-//   children?: ReactElement;
-// }
+function ProtectedRouteGuard({ children }: { children: JSX.Element }) {
+  const { user } = useAuth();
 
-// function ProtectedRouteGuard({ children }: Props) {
-//   const { authenticated } = useContext(AuthContext) as AuthContextType;
-
-//   if (!authenticated) {
-//     return <Navigate to="/" />;
-//   }
-
-//   return <>{children}</>;
-// }
+  if (user) {
+    return <>{children}</>;
+  }
+  return <Navigate to="/" />;
+}
 
 export default App;
