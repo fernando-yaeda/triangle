@@ -52,7 +52,7 @@ export default function NewTaskForm({ closeModal }: NewTaskFormProps) {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<NewTaskFormdata>({
     resolver: zodResolver(newTaskFormSchema),
   });
@@ -115,9 +115,20 @@ export default function NewTaskForm({ closeModal }: NewTaskFormProps) {
           <ErrorText>• {errors.dueTime.message}</ErrorText>
         </MultipleInputsErrors>
       )}
-      <Button width="100%" type="submit">
-        Create
-      </Button>
+      {isSubmitting ? (
+        <Button
+          width="100%"
+          type="submit"
+          disabled={true}
+          variant="whiteAndGrey"
+        >
+          Create
+        </Button>
+      ) : (
+        <Button width="100%" type="submit">
+          Create
+        </Button>
+      )}
     </Form>
   );
 }
