@@ -1,9 +1,9 @@
 import api from "./api";
 
 export type CreateTaskParams = {
-  name: string;
-  description?: string;
-  dueDate?: Date;
+  title: string;
+  description: string | null;
+  dueDate: Date | null;
 };
 
 async function create(
