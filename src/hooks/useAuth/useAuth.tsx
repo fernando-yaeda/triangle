@@ -35,7 +35,7 @@ export function AuthProvider({
 }): JSX.Element {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [initialLoading, setInitialLoading] = useState<boolean>(false);
+  const [initialLoading, setInitialLoading] = useState<boolean>(true);
 
   const { setItem, getItem } = useLocalStorage();
   const navigate = useNavigate();
