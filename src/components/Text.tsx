@@ -17,9 +17,9 @@ export const Text = styled("span").attrs<TextProps>(({ type = "span" }) => ({
     font-size: ${theme.fontVariants[variant].fontSize};
     font-weight: ${theme.fontVariants[variant].fontWeight};
     line-height: ${theme.fontVariants[variant].lineHeight};
-    a {
+    span {
       color: ${theme.colors.purple};
-      text-decoration: none;
+      cursor: pointer;
     }
   `}
 `;
