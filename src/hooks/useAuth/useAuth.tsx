@@ -24,6 +24,7 @@ interface AuthContextType {
     lastName,
     password,
   }: SignUpParams): Promise<void>;
+  logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
@@ -37,7 +38,7 @@ export function AuthProvider({
   const [loading, setLoading] = useState<boolean>(false);
   const [initialLoading, setInitialLoading] = useState<boolean>(true);
 
-  const { setItem, getItem } = useLocalStorage();
+  const { setItem, getItem, removeItem } = useLocalStorage();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -64,7 +65,7 @@ export function AuthProvider({
         return navigate("/home");
       })
       .catch((error) => {
-        if (error.message) {
+        if (error.response.data.message) {
           return toast.error(error.response.data.message);
         }
         return toast.error(
@@ -99,12 +100,27 @@ export function AuthProvider({
       .finally(() => setLoading(false));
   }
 
+  function logout() {
+    try {
+      setUser(null);
+      removeItem("user");
+      removeItem("token");
+      toast.success("You have successfully logged out!");
+      return navigate("/");
+    } catch (error) {
+      return toast.error(
+        "Oops... something went wrong. Please try again later"
+      );
+    }
+  }
+
   const memoedValue = useMemo(
     () => ({
       user,
       loading,
       signIn,
       signUp,
+      logout,
     }),
     [user, loading] // eslint-disable-line react-hooks/exhaustive-deps
   );
