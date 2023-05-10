@@ -67,6 +67,7 @@ export const Item = styled.button`
 `;
 
 const DropdownMenu = styled.div<{ isOpen: boolean }>`
+  display: ${(props) => (props.isOpen ? "flex" : "none")};
   visibility: ${(props) => (props.isOpen ? "visible" : "hidden")};
   opacity: ${(props) => (props.isOpen ? 1 : 0)};
 
@@ -79,7 +80,6 @@ const DropdownMenu = styled.div<{ isOpen: boolean }>`
 
   border-radius: 6px;
 
-  display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
