@@ -32,7 +32,8 @@ export function TasksCard({ userTasks }: TasksCardProps) {
           <Image src={TasksImage} alt="tasks" />
           <Text variant="headingSm">No tasks found</Text>
           <Text variant="textSmRegular" color="darkGrey">
-            Click to add New Task
+            Click to add{" "}
+            <span onClick={() => setIsModalOpen(true)}>New Task</span>
           </Text>
         </>
       )}
