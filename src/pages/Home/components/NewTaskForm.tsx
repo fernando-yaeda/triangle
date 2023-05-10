@@ -17,25 +17,23 @@ import taskService from "../../../services/taskService";
 
 const newTaskFormSchema = z
   .object({
-    name: z.string().nonempty("Task name should not be empty"),
+    title: z.string().nonempty("Task title should not be empty"),
     description: z
       .string()
       .optional()
-      .transform((value) => (value === "" ? undefined : value)),
+      .transform((value) => (value === "" ? null : value)),
     dueDate: z
       .string()
       .optional()
-      .transform((value) => (value === "" ? undefined : value)),
+      .transform((value) => (value === "" ? null : value)),
     dueTime: z
       .string()
       .optional()
-      .transform((value) => (value === "" ? undefined : value)),
+      .transform((value) => (value === "" ? null : value)),
   })
   .refine(
     (schema) =>
-      schema.dueDate === undefined && schema.dueTime !== undefined
-        ? false
-        : true,
+      schema.dueDate === null && schema.dueTime !== null ? false : true,
     {
       message: "Can't add due time if due date is not specified",
       path: ["dueTime"],
@@ -59,7 +57,7 @@ export default function NewTaskForm({ closeModal }: NewTaskFormProps) {
   const token = useToken();
 
   const handleSubmitData = async (data: NewTaskFormdata) => {
-    let sanitizedDueDate: Date | undefined = undefined;
+    let sanitizedDueDate: Date | null = null;
     if (data.dueDate) {
       const date = `${data.dueDate}T${
         data.dueTime ? data.dueTime : "00:00"
@@ -68,8 +66,8 @@ export default function NewTaskForm({ closeModal }: NewTaskFormProps) {
     }
 
     const createTaskBody = {
-      name: data.name,
-      description: data.description ?? undefined,
+      title: data.title,
+      description: data.description ?? null,
       dueDate: sanitizedDueDate,
     };
 
@@ -89,9 +87,9 @@ export default function NewTaskForm({ closeModal }: NewTaskFormProps) {
 
   return (
     <Form onSubmit={handleSubmit(handleSubmitData)}>
-      <Label>Task Name</Label>
-      <Input {...register("name")} placeholder="Insert the task name" />
-      {errors.name && <ErrorText>• {errors.name.message}</ErrorText>}
+      <Label>Task Title</Label>
+      <Input {...register("title")} placeholder="Insert the task title" />
+      {errors.title && <ErrorText>• {errors.title.message}</ErrorText>}
 
       <Label>Description</Label>
       <Input
