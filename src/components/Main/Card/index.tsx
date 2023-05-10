@@ -9,6 +9,7 @@ interface CardProps {
   subtitle: string;
   buttonIcon?: ReactNode;
   buttonText?: string;
+  buttonOnClick?: () => void;
   iconFirst?: boolean;
   hasContent?: boolean;
   children?: ReactNode;
@@ -19,6 +20,7 @@ export function Card({
   subtitle,
   buttonIcon,
   buttonText,
+  buttonOnClick,
   iconFirst = true,
   hasContent = true,
   children,
@@ -30,7 +32,7 @@ export function Card({
           <Text variant="headingMd">{title}</Text>
           <Text color="darkGrey">{subtitle}</Text>
         </S.TextWrapper>
-        <S.ButtonsWrapper>
+        <S.ButtonsWrapper onClick={buttonOnClick}>
           {(buttonText || buttonIcon) && (
             <Button gap="8px" variant="purple" fontVariant="textMd">
               {iconFirst && buttonIcon && buttonIcon}
