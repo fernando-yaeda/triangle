@@ -8,10 +8,12 @@ import {
   UserCircle,
   UserCirclePlus,
 } from "@phosphor-icons/react";
+import useAuth from "../../../../hooks/useAuth/useAuth";
 import { DropdownItem, MenuItem } from "./MenuItem";
 import * as S from "./styles";
 
 export function Menu() {
+  const { logout } = useAuth();
   return (
     <S.Container>
       <MenuItem icon={<Plus size={20} weight="bold" />}>
@@ -65,7 +67,7 @@ export function Menu() {
           <UserCirclePlus size={28} color="#5C5F62" />
           Invite Friends
         </DropdownItem>
-        <DropdownItem>
+        <DropdownItem onClick={logout}>
           <SignOut size={28} color="#5C5F62" />
           Logout
         </DropdownItem>
