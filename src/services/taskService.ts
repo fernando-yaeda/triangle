@@ -1,3 +1,4 @@
+import { Task } from "../types/Task";
 import api from "./api";
 
 export type CreateTaskParams = {
@@ -19,8 +20,19 @@ async function create(
   return response.data;
 }
 
+async function getTasks(token: string | null): Promise<Task[]> {
+  const response = await api.get("/tasks", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return response.data;
+}
+
 const taskService = {
   create,
+  getTasks,
 };
 
 export default taskService;
