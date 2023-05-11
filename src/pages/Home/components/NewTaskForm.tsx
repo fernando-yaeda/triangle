@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import dayjs from "dayjs";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { z } from "zod";
@@ -13,7 +14,7 @@ import {
 } from "../../../components/Auth/Forms/styles";
 import { Button } from "../../../components/Button";
 import { useToken } from "../../../hooks/useToken";
-import taskService from "../../../services/taskService";
+import taskService, { CreateTaskParams } from "../../../services/taskService";
 
 const newTaskFormSchema = z
   .object({
@@ -31,6 +32,14 @@ const newTaskFormSchema = z
       .optional()
       .transform((value) => (value === "" ? null : value)),
   })
+  .refine(
+    (schema) =>
+      schema.dueTime === null && schema.dueDate !== null ? false : true,
+    {
+      message: "Can't add due date if due time is not specified",
+      path: ["dueDate"],
+    }
+  )
   .refine(
     (schema) =>
       schema.dueDate === null && schema.dueTime !== null ? false : true,
@@ -57,15 +66,12 @@ export default function NewTaskForm({ closeModal }: NewTaskFormProps) {
   const token = useToken();
 
   const handleSubmitData = async (data: NewTaskFormdata) => {
-    let sanitizedDueDate: Date | null = null;
-    if (data.dueDate) {
-      const date = `${data.dueDate}T${
-        data.dueTime ? data.dueTime : "00:00"
-      }:00Z`;
-      sanitizedDueDate = new Date(date);
+    let sanitizedDueDate: string | null = null;
+    if (data.dueDate && data.dueTime) {
+      sanitizedDueDate = dayjs(data.dueDate + data.dueTime).toISOString();
     }
 
-    const createTaskBody = {
+    const createTaskBody: CreateTaskParams = {
       title: data.title,
       description: data.description ?? null,
       dueDate: sanitizedDueDate,
@@ -108,9 +114,10 @@ export default function NewTaskForm({ closeModal }: NewTaskFormProps) {
           <Input {...register("dueTime")} type="time" />
         </InputContainer>
       </MultipleInputsContainer>
-      {errors.dueTime && (
+      {(errors.dueTime || errors.dueDate) && (
         <MultipleInputsErrors>
-          <ErrorText>• {errors.dueTime.message}</ErrorText>
+          {errors.dueDate && <ErrorText>• {errors.dueDate.message}</ErrorText>}
+          {errors.dueTime && <ErrorText>• {errors.dueTime.message}</ErrorText>}
         </MultipleInputsErrors>
       )}
       {isSubmitting ? (
