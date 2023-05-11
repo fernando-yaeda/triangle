@@ -20,7 +20,7 @@ export const Main = styled.div`
 
 export const ContentWrapper = styled.div`
   height: 100%;
-  width: calc(100% - 288px);
+  width: calc(100% - 260px);
 
   display: flex;
   flex-direction: column;
@@ -28,6 +28,6 @@ export const ContentWrapper = styled.div`
   align-items: center;
 
   margin-top: 76px;
-  margin-left: 288px;
-  padding: 18px 92px;
+  margin-left: 260px;
+  padding: 18px 80px;
 `;

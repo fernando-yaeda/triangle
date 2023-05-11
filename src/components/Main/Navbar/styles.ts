@@ -2,14 +2,14 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   height: 100%;
-  width: 288px;
+  width: 260px;
 
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
 
-  padding: 24px 24px;
+  padding: 20px 20px;
 
   position: fixed;
   top: 0;
@@ -17,6 +17,10 @@ export const Container = styled.div`
 
   background-color: ${(props) => props.theme.colors.lightGrey};
   border-right: 1px solid ${(props) => props.theme.colors.mediumGrey};
+
+  > :first-child {
+    margin-left: 20px;
+  }
 `;
 
 export const Navbar = styled.nav`
@@ -43,6 +47,7 @@ export const NavItem = styled.div<{ isActive: boolean }>`
   justify-content: flex-start;
   align-items: center;
   gap: 12px;
+  flex-shrink: 0;
 
   padding: 0 20px;
   border-radius: 6px;

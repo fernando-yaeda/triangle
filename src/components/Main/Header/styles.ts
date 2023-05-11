@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: calc(100% - 288px);
+  width: calc(100% - 260px);
   height: 76px;
 
   display: flex;
@@ -10,7 +10,7 @@ export const Container = styled.div`
 
   position: fixed;
   top: 0;
-  left: 288px;
+  left: 260px;
   z-index: 1;
 
   padding: 0px 92px;
