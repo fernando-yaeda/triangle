@@ -53,7 +53,7 @@ export const theme = {
     textSm: {
       fontSize: "14px",
       fontWeight: 500,
-      lineHeight: "24px",
+      lineHeight: "22px",
     },
     textXs: {
       fontSize: "13px",
@@ -78,7 +78,7 @@ export const theme = {
     textSmRegular: {
       fontSize: "14px",
       fontWeight: 400,
-      lineHeight: "24px",
+      lineHeight: "22px",
     },
     textXsRegular: {
       fontSize: "13px",
