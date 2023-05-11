@@ -1,19 +1,33 @@
 import { Plus } from "@phosphor-icons/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import styled from "styled-components";
 import TasksImage from "../../../assets/tasks.png";
 import { Card } from "../../../components/Main/Card";
 import { TaskCard } from "../../../components/Main/TaskCard";
 import { Text } from "../../../components/Text";
+import { useToken } from "../../../hooks/useToken";
+import taskService from "../../../services/taskService";
 import { Task } from "../../../types/Task";
 import { NewTaskModal } from "./NewTaskModal";
 
-interface TasksCardProps {
-  userTasks: Task[];
-}
-
-export function TasksCard({ userTasks }: TasksCardProps) {
+export function TasksCard() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const token = useToken();
+
+  useEffect(() => {
+    async function getTasks() {
+      try {
+        const tasks = await taskService.getTasks(token);
+        setTasks(tasks);
+      } catch (error: any) {
+        toast.error("Error fetching tasks");
+      }
+    }
+    getTasks();
+  }, [tasks]); //eslint-disable-line
+
   return (
     <Card
       title="Tasks Priorities"
@@ -27,8 +41,8 @@ export function TasksCard({ userTasks }: TasksCardProps) {
         closeModal={() => setIsModalOpen(false)}
       />
 
-      {userTasks.length > 0 ? (
-        userTasks.map((task, index) => {
+      {tasks.length > 0 ? (
+        tasks.map((task, index) => {
           if (index < 4) {
             return (
               <TaskCard
