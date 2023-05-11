@@ -3,16 +3,17 @@ import { useState } from "react";
 import styled from "styled-components";
 import TasksImage from "../../../assets/tasks.png";
 import { Card } from "../../../components/Main/Card";
+import { TaskCard } from "../../../components/Main/TaskCard";
 import { Text } from "../../../components/Text";
+import { Task } from "../../../types/Task";
 import { NewTaskModal } from "./NewTaskModal";
 
 interface TasksCardProps {
-  userTasks?: string;
+  userTasks: Task[];
 }
 
 export function TasksCard({ userTasks }: TasksCardProps) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
   return (
     <Card
       title="Tasks Priorities"
@@ -25,8 +26,20 @@ export function TasksCard({ userTasks }: TasksCardProps) {
         isOpen={isModalOpen}
         closeModal={() => setIsModalOpen(false)}
       />
-      {userTasks ? (
-        <div>{userTasks}</div>
+
+      {userTasks.length > 0 ? (
+        userTasks.map((task, index) => {
+          if (index < 4) {
+            return (
+              <TaskCard
+                key={task.id}
+                title={task.title}
+                dueDate={task.dueDate}
+              />
+            );
+          }
+          return false;
+        })
       ) : (
         <>
           <Image src={TasksImage} alt="tasks" />
