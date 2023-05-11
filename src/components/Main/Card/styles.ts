@@ -24,7 +24,7 @@ export const Header = styled.div`
 export const ButtonsWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
 `;
 
 export const TextWrapper = styled.div`
@@ -32,4 +32,5 @@ export const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 4px;
 `;

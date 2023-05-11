@@ -29,23 +29,20 @@ export function Card({
     <S.Container hasContent={hasContent}>
       <S.Header>
         <S.TextWrapper>
-          <Text variant="headingMd">{title}</Text>
-          <Text color="darkGrey">{subtitle}</Text>
+          <Text variant="textLg">{title}</Text>
+          <Text variant="textSmRegular" color="darkGrey">
+            {subtitle}
+          </Text>
         </S.TextWrapper>
         <S.ButtonsWrapper onClick={buttonOnClick}>
           {(buttonText || buttonIcon) && (
-            <Button gap="8px" variant="purple" fontVariant="textMd">
+            <Button gap="8px" variant="purple" fontVariant="textSm">
               {iconFirst && buttonIcon && buttonIcon}
               {buttonText && buttonText}
               {!iconFirst && buttonIcon && buttonIcon}
             </Button>
           )}
-          <DotsSixVertical
-            size={32}
-            weight="bold"
-            color="#5C5F62"
-            cursor="pointer"
-          />
+          <DotsSixVertical size={32} color="#5C5F62" cursor="pointer" />
         </S.ButtonsWrapper>
       </S.Header>
       {children}
