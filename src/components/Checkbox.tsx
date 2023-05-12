@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 type CheckboxProps = {
-  onClick: () => void;
+  onClick: (args: any) => void;
   checked: boolean;
 };
 
