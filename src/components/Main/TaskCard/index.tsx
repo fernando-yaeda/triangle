@@ -2,29 +2,44 @@ import { CalendarBlank, DotsThree, Tag } from "@phosphor-icons/react";
 import dayjs from "dayjs";
 import * as utc from "dayjs/plugin/utc";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import { Text } from "../../../components/Text";
+import { useToken } from "../../../hooks/useToken";
+import taskService from "../../../services/taskService";
 import { Checkbox } from "../../Checkbox";
 import * as S from "./styles";
 dayjs.extend(utc);
 
 type TaskCardProps = {
+  id: number;
   title: string;
   dueDate: string | null;
 };
 
-export function TaskCard({ title, dueDate }: TaskCardProps) {
+export function TaskCard({ id, title, dueDate }: TaskCardProps) {
   const [checked, setChecked] = useState(false);
+  const token = useToken();
   let formattedDueDate;
 
   if (dueDate) {
     formattedDueDate = dayjs(dueDate).format("DD MMM YYYY - h:mm A");
   }
 
+  async function handleTask(id: number) {
+    try {
+      await taskService.updateStatus({ id, status: "DONE" }, token);
+      setChecked(!checked);
+      toast.success("card checked successfully");
+    } catch (error) {
+      toast.error("failed to update card status");
+    }
+  }
+
   return (
-    <S.Container>
+    <S.Container checked={checked}>
       <S.Container>
         <S.CheckboxContainer>
-          <Checkbox onClick={() => setChecked(!checked)} checked={checked} />
+          <Checkbox onClick={() => handleTask(id)} checked={checked} />
         </S.CheckboxContainer>
 
         <S.Details>

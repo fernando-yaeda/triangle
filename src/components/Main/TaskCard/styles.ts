@@ -10,11 +10,12 @@ export const Details = styled.div`
   width: 100%;
 `;
 
-export const Container = styled.div`
+export const Container = styled.div<{ checked?: boolean }>`
+  display: flex;
   width: 100%;
   height: 80px;
 
-  display: flex;
+  display: ${(props) => props.checked && "none"};
 `;
 
 export const Title = styled.div`
