@@ -1,5 +1,6 @@
 import { Plus } from "@phosphor-icons/react";
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 import TasksImage from "../../../assets/tasks.png";
@@ -11,22 +12,44 @@ import taskService from "../../../services/taskService";
 import { Task } from "../../../types/Task";
 import { NewTaskModal } from "./NewTaskModal";
 
+type TaskFilter = "upcomming" | "overdue" | "completed";
+
 export function TasksCard() {
+  console.log("rendered");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [filter, setFilter] = useState<TaskFilter>("upcomming");
   const token = useToken();
 
-  useEffect(() => {
-    async function getTasks() {
-      try {
-        const tasks = await taskService.getTasks(token);
-        setTasks(tasks);
-      } catch (error: any) {
-        toast.error("Error fetching tasks");
-      }
-    }
-    getTasks();
-  }, [tasks]); //eslint-disable-line
+  function upcommingTasks(tasks: Task[]): Task[] | [] {
+    return tasks.filter(
+      (task) => task.dueDate && task.dueDate > new Date().toISOString()
+    );
+  }
+
+  function overdueTasks(tasks: Task[]): Task[] | [] {
+    return tasks.filter(
+      (task) => task.dueDate && task.dueDate < new Date().toISOString()
+    );
+  }
+
+  function completedTasks(tasks: Task[]): Task[] | [] {
+    return tasks.filter((task) => task.status === "DONE");
+  }
+
+  const { data, isSuccess } = useQuery({
+    queryKey: ["tasks-list"],
+    queryFn: () =>
+      taskService.getTasks(token, { sortBy: "dueDate", orderBy: "ASC" }),
+    select: (tasks) => {
+      if (filter === "upcomming") return upcommingTasks(tasks);
+      if (filter === "overdue") return overdueTasks(tasks);
+      if (filter === "completed") return completedTasks(tasks);
+    },
+    onError: (error) => {
+      console.log(error);
+      toast.error("Error fetching tasks");
+    },
+  });
 
   return (
     <Card
@@ -41,18 +64,16 @@ export function TasksCard() {
         closeModal={() => setIsModalOpen(false)}
       />
 
-      {tasks.length > 0 ? (
-        tasks.map((task, index) => {
-          if (index < 4) {
-            return (
-              <TaskCard
-                key={task.id}
-                title={task.title}
-                dueDate={task.dueDate}
-              />
-            );
-          }
-          return false;
+      {isSuccess && data && data.length > 0 ? (
+        data.slice(0, 3).map((task) => {
+          return (
+            <TaskCard
+              key={task.id}
+              id={task.id}
+              title={task.title}
+              dueDate={task.dueDate}
+            />
+          );
         })
       ) : (
         <>
