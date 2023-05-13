@@ -16,7 +16,11 @@ export function AnnouncementCard({ announcements }: AnnouncementCardProps) {
         <>
           <Image src={AnnouncementsImage} alt="announcements" />
           <Text variant="headingSm">No announcements found</Text>
-          <Text variant="textSmRegular" color="darkGrey">
+          <Text
+            variant="textSmRegular"
+            color="darkGrey"
+            style={{ marginBottom: "80px" }}
+          >
             Click to add New Announcement
           </Text>
         </>
@@ -29,5 +33,6 @@ const Image = styled.img`
   width: 100px;
   height: auto;
   align-self: center;
+  margin-top: 52px;
   padding: 40px 0;
 `;
