@@ -13,7 +13,7 @@ import taskService from "../../../services/taskService";
 import { Task } from "../../../types/Task";
 import { NewTaskModal } from "./NewTaskModal";
 
-type TaskFilter = "upcoming" | "overdue" | "completed";
+type TaskFilter = "upcoming" | "overdue" | "completed" | "no due date";
 
 export function TasksCard() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -42,6 +42,10 @@ export function TasksCard() {
     return tasks.filter((task) => task.status === "DONE");
   }
 
+  function noDueDateTasks(tasks: Task[]): Task[] | [] {
+    return tasks.filter((task) => !task.dueDate && task.status !== "DONE");
+  }
+
   const { data, isSuccess } = useQuery({
     queryKey: ["tasks-list"],
     queryFn: () =>
@@ -50,6 +54,7 @@ export function TasksCard() {
       if (filter === "upcoming") return upcommingTasks(tasks);
       if (filter === "overdue") return overdueTasks(tasks);
       if (filter === "completed") return completedTasks(tasks);
+      if (filter === "no due date") return noDueDateTasks(tasks);
     },
     onError: (error) => {
       console.log(error);
@@ -89,6 +94,14 @@ export function TasksCard() {
           disabled={filter === "completed"}
         >
           Completed
+        </Button>
+        <Button
+          variant="filterButton"
+          fontVariant="textXs"
+          onClick={() => setFilter("no due date")}
+          disabled={filter === "no due date"}
+        >
+          No Due Date
         </Button>
       </TasksFilter>
       <NewTaskModal
