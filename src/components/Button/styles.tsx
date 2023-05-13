@@ -7,6 +7,7 @@ export const variants = {
     color: theme.colors.white,
     hoverBgColor: theme.colors.mediumGrey,
     hoverColor: theme.colors.darkGrey,
+    padding: "8px 16px",
     boxShadow: "none",
   },
   whiteAndGrey: {
@@ -14,6 +15,16 @@ export const variants = {
     color: theme.colors.black,
     hoverBgColor: "none",
     hoverColor: "none",
+    padding: "8px 16px",
+    boxShadow:
+      "rgba(0, 0, 0, 0.05) 0px 0px 2px 0px, rgba(0, 0, 0, 0.1) 0px 0px 0px 1px",
+  },
+  filterButton: {
+    bgColor: theme.colors.white,
+    color: theme.colors.darkGrey,
+    hoverBgColor: theme.colors.mediumGrey,
+    hoverColor: theme.colors.darkGrey,
+    padding: "6px 12px",
     boxShadow:
       "rgba(0, 0, 0, 0.05) 0px 0px 2px 0px, rgba(0, 0, 0, 0.1) 0px 0px 0px 1px",
   },
@@ -22,6 +33,7 @@ export const variants = {
     color: theme.colors.purple,
     hoverBgColor: theme.colors.purple,
     hoverColor: theme.colors.lightBlue,
+    padding: "8px 16px",
     boxShadow:
       "rgba(0, 0, 0, 0.05) 0px 0px 2px 0px, rgba(0, 0, 0, 0.1) 0px 0px 0px 1px",
   },
@@ -56,7 +68,7 @@ export const Button = styled.button<ButtonProps>`
     align-items: center;
     gap: ${gap};
 
-    padding: 8px 16px;
+    padding: ${variants[variant].padding};
 
     border: none;
     border-radius: 6px;
@@ -71,6 +83,11 @@ export const Button = styled.button<ButtonProps>`
     color: ${variants[variant].color};
 
     &:hover {
+      background-color: ${variants[variant].hoverBgColor};
+      color: ${variants[variant].hoverColor};
+    }
+
+    &:disabled {
       background-color: ${variants[variant].hoverBgColor};
       color: ${variants[variant].hoverColor};
     }
