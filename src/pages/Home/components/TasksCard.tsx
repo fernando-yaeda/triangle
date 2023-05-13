@@ -4,6 +4,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 import TasksImage from "../../../assets/tasks.png";
+import { Button } from "../../../components/Button";
 import { Card } from "../../../components/Main/Card";
 import { TaskCard } from "../../../components/Main/TaskCard";
 import { Text } from "../../../components/Text";
@@ -12,23 +13,28 @@ import taskService from "../../../services/taskService";
 import { Task } from "../../../types/Task";
 import { NewTaskModal } from "./NewTaskModal";
 
-type TaskFilter = "upcomming" | "overdue" | "completed";
+type TaskFilter = "upcoming" | "overdue" | "completed";
 
 export function TasksCard() {
-  console.log("rendered");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [filter, setFilter] = useState<TaskFilter>("upcomming");
+  const [filter, setFilter] = useState<TaskFilter>("upcoming");
   const token = useToken();
 
   function upcommingTasks(tasks: Task[]): Task[] | [] {
     return tasks.filter(
-      (task) => task.dueDate && task.dueDate > new Date().toISOString()
+      (task) =>
+        task.dueDate &&
+        task.dueDate > new Date().toISOString() &&
+        task.status !== "DONE"
     );
   }
 
   function overdueTasks(tasks: Task[]): Task[] | [] {
     return tasks.filter(
-      (task) => task.dueDate && task.dueDate < new Date().toISOString()
+      (task) =>
+        task.dueDate &&
+        task.dueDate < new Date().toISOString() &&
+        task.status !== "DONE"
     );
   }
 
@@ -41,7 +47,7 @@ export function TasksCard() {
     queryFn: () =>
       taskService.getTasks(token, { sortBy: "dueDate", orderBy: "ASC" }),
     select: (tasks) => {
-      if (filter === "upcomming") return upcommingTasks(tasks);
+      if (filter === "upcoming") return upcommingTasks(tasks);
       if (filter === "overdue") return overdueTasks(tasks);
       if (filter === "completed") return completedTasks(tasks);
     },
@@ -59,13 +65,39 @@ export function TasksCard() {
       buttonIcon={<Plus size={20} />}
       buttonOnClick={() => setIsModalOpen(true)}
     >
+      <TasksFilter>
+        <Button
+          variant="filterButton"
+          fontVariant="textXs"
+          onClick={() => setFilter("upcoming")}
+          disabled={filter === "upcoming"}
+        >
+          Upcoming
+        </Button>
+        <Button
+          variant="filterButton"
+          fontVariant="textXs"
+          onClick={() => setFilter("overdue")}
+          disabled={filter === "overdue"}
+        >
+          Overdue
+        </Button>
+        <Button
+          variant="filterButton"
+          fontVariant="textXs"
+          onClick={() => setFilter("completed")}
+          disabled={filter === "completed"}
+        >
+          Completed
+        </Button>
+      </TasksFilter>
       <NewTaskModal
         isOpen={isModalOpen}
         closeModal={() => setIsModalOpen(false)}
       />
 
       {isSuccess && data && data.length > 0 ? (
-        data.slice(0, 3).map((task) => {
+        data.slice(0, 4).map((task) => {
           return (
             <TaskCard
               key={task.id}
@@ -79,7 +111,11 @@ export function TasksCard() {
         <>
           <Image src={TasksImage} alt="tasks" />
           <Text variant="headingSm">No tasks found</Text>
-          <Text variant="textSmRegular" color="darkGrey">
+          <Text
+            variant="textSmRegular"
+            color="darkGrey"
+            style={{ marginBottom: "80px" }}
+          >
             Click to add{" "}
             <span onClick={() => setIsModalOpen(true)}>New Task</span>
           </Text>
@@ -94,4 +130,16 @@ const Image = styled.img`
   height: auto;
   align-self: center;
   padding: 40px 0;
+`;
+
+const TasksFilter = styled.div`
+  width: 100%;
+  height: 36px;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+
+  margin-bottom: 16px;
 `;
