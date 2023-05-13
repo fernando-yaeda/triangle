@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import dayjs from "dayjs";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -64,6 +65,24 @@ export default function NewTaskForm({ closeModal }: NewTaskFormProps) {
     resolver: zodResolver(newTaskFormSchema),
   });
   const token = useToken();
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: async (createTaskBody: CreateTaskParams) => {
+      return await taskService.create(createTaskBody, token);
+    },
+    onSuccess: () => {
+      toast.success("You have successfully created a new task!");
+      queryClient.invalidateQueries(["tasks-list"]);
+      closeModal();
+    },
+    onError: (errors: any) => {
+      if (errors?.response?.data?.message) {
+        return toast.error(errors.response.data.message);
+      }
+      toast.error("Oops... something went wrong. Please try again later");
+    },
+  });
 
   const handleSubmitData = async (data: NewTaskFormdata) => {
     let sanitizedDueDate: string | null = null;
@@ -77,18 +96,7 @@ export default function NewTaskForm({ closeModal }: NewTaskFormProps) {
       dueDate: sanitizedDueDate,
     };
 
-    try {
-      await taskService.create(createTaskBody, token);
-      toast.success("You have successfully created a new task!");
-      closeModal();
-    } catch (error: any) {
-      if (error?.response?.data?.message) {
-        return toast.error(error.response.data.message);
-      }
-      return toast.error(
-        "Oops... something went wrong. Please try again later"
-      );
-    }
+    mutation.mutate(createTaskBody);
   };
 
   return (
