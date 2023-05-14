@@ -1,7 +1,7 @@
 import { CalendarBlank, DotsThree, Tag } from "@phosphor-icons/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import dayjs from "dayjs";
-import * as utc from "dayjs/plugin/utc";
+import utc from "dayjs/plugin/utc";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { Text } from "../../../components/Text";
