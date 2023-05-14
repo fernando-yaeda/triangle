@@ -1,4 +1,5 @@
 import { CalendarBlank, DotsThree, Tag } from "@phosphor-icons/react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import dayjs from "dayjs";
 import * as utc from "dayjs/plugin/utc";
 import { useState } from "react";
@@ -19,20 +20,33 @@ type TaskCardProps = {
 export function TaskCard({ id, title, dueDate }: TaskCardProps) {
   const [checked, setChecked] = useState(false);
   const token = useToken();
+  const queryClient = useQueryClient();
   let formattedDueDate;
 
   if (dueDate) {
     formattedDueDate = dayjs(dueDate).format("DD MMM YYYY - h:mm A");
   }
 
+  const mutation = useMutation({
+    mutationFn: async (id: number) => {
+      return await taskService.updateStatus({ id, status: "DONE" }, token);
+    },
+    onSuccess: () => {
+      toast.success("Card completed successfully");
+      queryClient.invalidateQueries(["tasks-list"]);
+    },
+    onError: (errors: any) => {
+      if (errors?.response?.data?.message) {
+        return toast.error(errors.response.data.message);
+      }
+      toast.error("Oops... something went wrong. Please try again later");
+    },
+  });
+
   async function handleTask(id: number) {
-    try {
-      await taskService.updateStatus({ id, status: "DONE" }, token);
-      setChecked(!checked);
-      toast.success("card checked successfully");
-    } catch (error) {
-      toast.error("failed to update card status");
-    }
+    setChecked(!checked);
+
+    mutation.mutate(id);
   }
 
   return (
