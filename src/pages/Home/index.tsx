@@ -28,7 +28,6 @@ export default function Home() {
 
 const Container = styled.div`
   width: 100%;
-  flex: 0 0 auto;
 `;
 
 const Row = styled.div`
@@ -39,4 +38,8 @@ const Row = styled.div`
   gap: 20px;
 
   margin-bottom: 20px;
+
+  @media (max-width: 1300px) {
+    flex-wrap: wrap;
+  }
 `;

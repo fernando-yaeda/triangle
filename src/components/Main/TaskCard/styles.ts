@@ -13,7 +13,7 @@ export const Details = styled.div`
 export const Container = styled.div<{ checked?: boolean }>`
   display: flex;
   width: 100%;
-  height: 80px;
+  height: 72px;
 
   display: ${(props) => props.checked && "none"};
 `;

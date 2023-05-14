@@ -1,13 +1,14 @@
 import styled from "styled-components";
 
 export const Container = styled.div<{ hasContent: boolean }>`
+  height: ${(props) => props.hasContent && "440px"};
   width: 100%;
 
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  padding: ${(props) => (props.hasContent ? "0 20px 20px 20px" : "0px 20px")};
+  padding: ${(props) => (props.hasContent ? "0 20px 16px 20px" : "0px 20px")};
 
   box-shadow: ${(props) => props.theme.borders.default};
   border-radius: 12px;

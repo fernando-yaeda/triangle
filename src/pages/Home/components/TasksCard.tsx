@@ -124,11 +124,7 @@ export function TasksCard() {
         <>
           <Image src={TasksImage} alt="tasks" />
           <Text variant="headingSm">No tasks found</Text>
-          <Text
-            variant="textSmRegular"
-            color="darkGrey"
-            style={{ marginBottom: "80px" }}
-          >
+          <Text variant="textSmRegular" color="darkGrey">
             Click to add{" "}
             <span onClick={() => setIsModalOpen(true)}>New Task</span>
           </Text>
@@ -154,5 +150,5 @@ const TasksFilter = styled.div`
   align-items: center;
   gap: 8px;
 
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 `;

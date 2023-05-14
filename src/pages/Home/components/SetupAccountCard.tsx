@@ -13,6 +13,6 @@ export function SetUpAccountCard() {
       buttonIcon={<CaretRight size={20} />}
       iconFirst={false}
       hasContent={false}
-    ></Card>
+    />
   );
 }

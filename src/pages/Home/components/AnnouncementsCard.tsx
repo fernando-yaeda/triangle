@@ -16,11 +16,7 @@ export function AnnouncementCard({ announcements }: AnnouncementCardProps) {
         <>
           <Image src={AnnouncementsImage} alt="announcements" />
           <Text variant="headingSm">No announcements found</Text>
-          <Text
-            variant="textSmRegular"
-            color="darkGrey"
-            style={{ marginBottom: "80px" }}
-          >
+          <Text variant="textSmRegular" color="darkGrey">
             Click to add New Announcement
           </Text>
         </>
