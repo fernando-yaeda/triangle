@@ -70,6 +70,10 @@ export function TasksCard() {
       buttonIcon={<Plus size={20} />}
       buttonOnClick={() => setIsModalOpen(true)}
     >
+      <NewTaskModal
+        isOpen={isModalOpen}
+        closeModal={() => setIsModalOpen(false)}
+      />
       <TasksFilter>
         <Button
           variant="filterButton"
@@ -104,10 +108,6 @@ export function TasksCard() {
           No Due Date
         </Button>
       </TasksFilter>
-      <NewTaskModal
-        isOpen={isModalOpen}
-        closeModal={() => setIsModalOpen(false)}
-      />
 
       {isSuccess && data && data.length > 0 ? (
         data.slice(0, 4).map((task) => {
