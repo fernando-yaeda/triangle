@@ -1,16 +1,17 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: calc(100% - 260px);
-  height: 76px;
+  width: 100%;
+  height: 68px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 260px;
+  flex-shrink: 0;
+
   z-index: 1;
 
   padding: 0px 92px;
