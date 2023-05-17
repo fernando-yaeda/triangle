@@ -1,8 +1,9 @@
-import { SignIn } from "@phosphor-icons/react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Outlet, Route, Routes } from "react-router-dom";
+import { PageWrapper } from "../components/Main/PageWrapper";
 import useAuth from "../hooks/useAuth/useAuth";
 import Dashboard from "../pages/Dashboard";
 import Home from "../pages/Home";
+import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 
 export default function AppRoutes() {
@@ -11,31 +12,18 @@ export default function AppRoutes() {
       <Route path="/" element={<SignIn />} />
       <Route path="/sign-up" element={<SignUp />} />
 
-      <Route
-        path="/home"
-        element={
-          <ProtectedRouteGuard>
-            <Home />
-          </ProtectedRouteGuard>
-        }
-      />
-      <Route
-        path="/dashboard"
-        element={
-          <ProtectedRouteGuard>
-            <Dashboard />
-          </ProtectedRouteGuard>
-        }
-      />
+      <Route element={<ProtectedRoutes />}>
+        <Route element={<PageWrapper />}>
+          <Route path="/home" element={<Home />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
+      </Route>
     </Routes>
   );
 }
 
-function ProtectedRouteGuard({ children }: { children: JSX.Element }) {
+function ProtectedRoutes() {
   const { user } = useAuth();
 
-  if (user) {
-    return <>{children}</>;
-  }
-  return <Navigate to="/" />;
+  return user ? <Outlet /> : <Navigate to="/" />;
 }
