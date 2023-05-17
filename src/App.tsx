@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "styled-components";
 import { AuthProvider } from "./hooks/useAuth/useAuth";
 import AppRoutes from "./routes";
@@ -25,6 +26,7 @@ function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
+        <Analytics />
         <ToastContainer />
         <GlobalStyle />
         <ThemeProvider theme={theme}>
