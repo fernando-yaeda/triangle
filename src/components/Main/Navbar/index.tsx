@@ -1,6 +1,7 @@
 import {
   CalendarBlank,
   Cards,
+  CaretCircleRight,
   ChartLine,
   Chat,
   House,
@@ -8,75 +9,82 @@ import {
   Users,
 } from "@phosphor-icons/react";
 import { ReactNode } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import useSidebar from "../../../hooks/useSidebar";
 import Logo from "../../Logo";
+import { NavItem } from "./NavbarItem";
 import * as S from "./styles";
 
+type NavItem = {
+  href: string;
+  icon: ReactNode;
+  name: string;
+};
+
+const navbarItems: NavItem[] = [
+  {
+    href: "/home",
+    icon: <House size={24} weight="bold" />,
+    name: "Home",
+  },
+  {
+    href: "/dashboard",
+    icon: <ChartLine size={24} weight="bold" />,
+    name: "Dashboard",
+  },
+
+  {
+    href: "/teams",
+    icon: <Users size={24} weight="bold" />,
+    name: "Teams",
+  },
+
+  {
+    href: "/boards",
+    icon: <Cards size={24} weight="bold" />,
+    name: "Boards",
+  },
+
+  {
+    href: "/inbox",
+    icon: <Chat size={24} weight="bold" />,
+    name: "Inbox",
+  },
+
+  {
+    href: "/timeline",
+    icon: <CalendarBlank size={24} weight="bold" />,
+    name: "Timeline",
+  },
+
+  {
+    href: "/more",
+    icon: <SquaresFour size={24} weight="bold" />,
+    name: "More",
+  },
+];
+
 export default function Navbar() {
-  const location = useLocation();
+  const { isSidebarOpen, toggleSidebar } = useSidebar();
+
   return (
-    <S.Container>
-      <Logo />
+    <S.Container isSidebarOpen={isSidebarOpen}>
+      <S.HeaderContainer isSidebarOpen={isSidebarOpen}>
+        <Logo hasText={isSidebarOpen} />
+        <CaretCircleRight
+          onClick={toggleSidebar}
+          size={24}
+          color="#5c5f62"
+          weight="fill"
+        />
+      </S.HeaderContainer>
       <S.Navbar>
-        <NavItem to="/home" isActive={location.pathname === "/home"}>
-          <House size={24} weight="bold" />
-          Home
-        </NavItem>
-
-        <NavItem to="/dashboard" isActive={location.pathname === "/dashboard"}>
-          <ChartLine size={24} weight="bold" />
-          Dashboard
-        </NavItem>
-
-        <NavItem to="/teams" isActive={location.pathname === "/teams"}>
-          <Users size={24} weight="bold" />
-          Teams
-        </NavItem>
-
-        <NavItem to="/boards" isActive={location.pathname === "/boards"}>
-          <Cards size={24} weight="bold" />
-          Boards
-        </NavItem>
-
-        <NavItem to="/inbox" isActive={location.pathname === "/inbox"}>
-          <Chat size={24} weight="bold" />
-          Inbox
-        </NavItem>
-
-        <NavItem to="/timeline" isActive={location.pathname === "/timeline"}>
-          <CalendarBlank size={24} weight="bold" />
-          Timeline
-        </NavItem>
-
-        <NavItem
-          to="/more-options"
-          isActive={location.pathname === "/more-options"}
-        >
-          <SquaresFour size={24} weight="bold" />
-          More Options
-        </NavItem>
+        {navbarItems &&
+          navbarItems.map((item) => {
+            return (
+              <NavItem href={item.href} icon={item.icon} name={item.name} />
+            );
+          })}
       </S.Navbar>
     </S.Container>
-  );
-}
-
-interface NavItemProps {
-  children: ReactNode;
-  to: string;
-  isActive: boolean;
-}
-
-function NavItem({ children, to, isActive }: NavItemProps) {
-  const navigate = useNavigate();
-
-  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    event.preventDefault();
-    navigate(to);
-  };
-
-  return (
-    <S.NavItem onClick={handleClick} isActive={isActive}>
-      {children}
-    </S.NavItem>
   );
 }
