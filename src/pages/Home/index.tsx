@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { PageWrapper } from "../../components/Main/PageWrapper";
 import { AnnouncementCard } from "./components/AnnouncementsCard";
 import { ProjectsCard } from "./components/ProjectsCard";
 import { SetUpAccountCard } from "./components/SetupAccountCard";
@@ -7,30 +6,34 @@ import { TasksCard } from "./components/TasksCard";
 
 export default function Home() {
   return (
-    <PageWrapper currentPage="Home">
-      <Container>
-        <Row>
-          <SetUpAccountCard />
-        </Row>
+    <Container>
+      <Row>
+        <SetUpAccountCard />
+      </Row>
 
-        <Row>
-          <TasksCard />
-          <AnnouncementCard />
-        </Row>
+      <Row>
+        <TasksCard />
+        <AnnouncementCard />
+      </Row>
 
-        <Row>
-          <ProjectsCard />
-        </Row>
-      </Container>
-    </PageWrapper>
+      <Row>
+        <ProjectsCard />
+      </Row>
+    </Container>
   );
 }
 
 const Container = styled.div`
+  height: auto;
   width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 `;
 
 const Row = styled.div`
+  height: auto;
   width: 100%;
   display: flex;
   justify-content: center;
