@@ -2,13 +2,19 @@ import styled from "styled-components";
 import logo from "../assets/logo.png";
 import { Text } from "./Text";
 
-export default function Logo() {
+type LogoProps = {
+  hasText?: boolean;
+};
+
+export default function Logo({ hasText = true }: LogoProps) {
   return (
     <Container>
       <LogoImage src={logo} alt="logo image" />
-      <Text color="black" variant="headingLg">
-        Triangle
-      </Text>
+      {hasText && (
+        <Text color="black" variant="headingLg" style={{ marginLeft: "8px" }}>
+          Triangle
+        </Text>
+      )}
     </Container>
   );
 }
@@ -24,6 +30,4 @@ const Container = styled.div`
 const LogoImage = styled.img`
   height: 30px;
   width: 30px;
-
-  margin-right: 8px;
 `;
