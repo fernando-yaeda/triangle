@@ -1,21 +1,23 @@
-import { ReactNode } from "react";
+import { Outlet } from "react-router-dom";
+import { SidebarProvider } from "../../../hooks/useSidebar";
 import Header from "../Header";
 import Navbar from "../Navbar";
 import * as S from "./styles";
 
-interface PageWrapperProps {
-  children: ReactNode;
-  currentPage: string;
-}
-
-export function PageWrapper({ children, currentPage }: PageWrapperProps) {
+export function PageWrapper() {
   return (
     <S.Container>
-      <S.Main>
-        <Navbar />
-        <Header currentPage={currentPage} />
-        <S.ContentWrapper>{children}</S.ContentWrapper>
-      </S.Main>
+      <SidebarProvider>
+        <S.Left>
+          <Navbar />
+        </S.Left>
+      </SidebarProvider>
+      <S.Right>
+        <Header />
+        <S.ContentWrapper>
+          <Outlet />
+        </S.ContentWrapper>
+      </S.Right>
     </S.Container>
   );
 }
