@@ -1,16 +1,10 @@
-import { Text } from "../../../Text";
+import { CaretLeft } from "@phosphor-icons/react";
 import * as S from "./styles";
 
-interface PageNavigatorProps {
-  pageName: string;
-}
-
-export function PageNavigator({ pageName }: PageNavigatorProps) {
+export function PageNavigator() {
   return (
     <S.Container>
-      <Text color="darkGrey" variant="textXl">
-        {pageName}
-      </Text>
+      <CaretLeft size={24} />
     </S.Container>
   );
 }
