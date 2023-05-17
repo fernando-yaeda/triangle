@@ -11,6 +11,11 @@ const GlobalStyle = createGlobalStyle`
       background-color: #FBE4E1
     }
   }
+
+  html, body, #root {
+    height: 100%;
+    overflow: hidden;
+  }
 `;
 
 export default GlobalStyle;
