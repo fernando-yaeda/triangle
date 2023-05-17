@@ -138,7 +138,7 @@ export default function NewTaskForm({ closeModal }: NewTaskFormProps) {
           Create
         </Button>
       ) : (
-        <Button width="100%" type="submit">
+        <Button width="100%" disabled={true} variant="whiteAndGrey">
           Create
         </Button>
       )}

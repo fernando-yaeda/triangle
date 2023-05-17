@@ -90,7 +90,7 @@ export default function ProjectForm({ closeModal }: ProjectFormProps) {
           Create
         </Button>
       ) : (
-        <Button width="100%" type="submit">
+        <Button width="100%" disabled={true} variant="whiteAndGrey">
           Create
         </Button>
       )}
