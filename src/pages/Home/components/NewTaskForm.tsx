@@ -60,7 +60,7 @@ export default function NewTaskForm({ closeModal }: NewTaskFormProps) {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitSuccessful },
   } = useForm<NewTaskFormdata>({
     resolver: zodResolver(newTaskFormSchema),
   });
@@ -85,6 +85,7 @@ export default function NewTaskForm({ closeModal }: NewTaskFormProps) {
   });
 
   const handleSubmitData = async (data: NewTaskFormdata) => {
+    console.log("s");
     let sanitizedDueDate: string | null = null;
     if (data.dueDate && data.dueTime) {
       sanitizedDueDate = dayjs(data.dueDate + data.dueTime).toISOString();
@@ -128,20 +129,14 @@ export default function NewTaskForm({ closeModal }: NewTaskFormProps) {
           {errors.dueTime && <ErrorText>• {errors.dueTime.message}</ErrorText>}
         </MultipleInputsErrors>
       )}
-      {isSubmitting ? (
-        <Button
-          width="100%"
-          type="submit"
-          disabled={true}
-          variant="whiteAndGrey"
-        >
-          Create
-        </Button>
-      ) : (
-        <Button width="100%" disabled={true} variant="whiteAndGrey">
-          Create
-        </Button>
-      )}
+      <Button
+        type="submit"
+        width="100%"
+        disabled={isSubmitSuccessful}
+        variant="blackAndWhite"
+      >
+        Create
+      </Button>
     </Form>
   );
 }
