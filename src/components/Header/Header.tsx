@@ -1,23 +1,17 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "../Button/index";
 import Logo from "../Logo";
 
-function Header() {
-  const navigate = useNavigate();
-  const [scrollY, setScrollY] = useState(0);
+type HeaderProps = {
+  scrollY: number;
+};
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.addEventListener("scroll", () => {
-        setScrollY(window.scrollY);
-      });
-    }
-  }, []);
+function Header({ scrollY }: HeaderProps) {
+  const navigate = useNavigate();
 
   return (
-    <Container scrollY={scrollY}>
+    <Container id="headerContainer" scrollY={scrollY}>
       <Logo />
       <ButtonsContainer>
         <Button onClick={() => navigate("/")}>Explore Features</Button>
@@ -29,7 +23,7 @@ function Header() {
 
 const Container = styled.header<{ scrollY: number }>`
   height: 76px;
-  width: 100vw;
+  width: 100%;
 
   display: flex;
   justify-content: space-between;
@@ -37,14 +31,15 @@ const Container = styled.header<{ scrollY: number }>`
 
   padding: 20px 88px;
 
-  position: fixed;
+  position: sticky;
   top: 0;
+  left: 0;
   z-index: 1;
 
   background-color: ${(props) => props.theme.colors.white};
 
   box-shadow: ${(props) =>
-    props.scrollY > 0
+    props.scrollY > 76
       ? "rgba(0, 0, 0, 0.05) 0px 8px 8px 1px, rgba(0, 0, 0, 0.1) 0px 0px 0px 1px"
       : "none"};
 `;
