@@ -102,7 +102,7 @@ export default function SignUpForm() {
       <S.Input
         {...register("username")}
         id="username"
-        placeholder="username"
+        placeholder="Username"
         type="username"
       />
       {errors.username && (
