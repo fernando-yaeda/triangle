@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   height: 100%;
-  width: 100vw;
+  width: 100%;
 
   display: flex;
 `;
@@ -34,7 +34,12 @@ export const ContentWrapper = styled.div`
   align-items: center;
   flex-grow: 1;
 
-  padding: 20px 80px;
+  padding: 20px 72px;
 
   overflow-y: auto;
+  overflow-x: auto;
+
+  @media (max-width: 1040px) {
+    padding: 20px 40px;
+  }
 `;
