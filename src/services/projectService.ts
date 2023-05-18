@@ -10,7 +10,7 @@ async function create(
   data: CreateProjectParams,
   token: string | null
 ): Promise<Project> {
-  const response = await api.post("/tasks", data, {
+  const response = await api.post("/projects", data, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -19,7 +19,7 @@ async function create(
   return response.data;
 }
 
-async function getTasks(token: string | null): Promise<Project[]> {
+async function getProjects(token: string | null): Promise<Project[]> {
   const response = await api.get(`/projects`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -29,9 +29,9 @@ async function getTasks(token: string | null): Promise<Project[]> {
   return response.data;
 }
 
-const taskService = {
+const projectService = {
   create,
-  getTasks,
+  getProjects,
 };
 
-export default taskService;
+export default projectService;
