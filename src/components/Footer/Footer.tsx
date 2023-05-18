@@ -12,10 +12,11 @@ export default function Footer() {
 }
 
 const Container = styled.footer`
-  height: 80px;
+  height: 88px;
   width: 100%;
 
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-shrink: 0;
 `;

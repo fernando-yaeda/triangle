@@ -3,6 +3,7 @@
 import styled from "styled-components";
 
 export const Form = styled.form`
+  height: auto;
   width: 100%;
 
   display: flex;
@@ -12,19 +13,23 @@ export const Form = styled.form`
 `;
 
 export const Label = styled.label`
+  height: auto;
   width: 100%;
 
   display: flex;
   justify-content: flex-start;
 
-  margin-bottom: -8px;
+  margin-bottom: -12px;
 
   color: ${(props) => props.theme.colors.darkGrey};
+  font-size: ${(props) => props.theme.fontVariants.textXsRegular.fontSize};
+  line-height: ${(props) => props.theme.fontVariants.textXsRegular.lineHeight};
+  font-weight: ${(props) => props.theme.fontVariants.textXsRegular.fontWeight};
 `;
 
 export const Input = styled.input`
   width: 100%;
-  height: 40px;
+  height: 36px;
 
   padding: 0 16px;
 
@@ -36,8 +41,8 @@ export const Input = styled.input`
 
   background-color: ${(props) => props.theme.colors.lightGrey};
 
-  font-size: ${(props) => props.theme.fontVariants.textMd.fontSize};
-  line-height: ${(props) => props.theme.fontVariants.textMd.lineHeight};
+  font-size: ${(props) => props.theme.fontVariants.textSm.fontSize};
+  line-height: ${(props) => props.theme.fontVariants.textSm.lineHeight};
 
   &:focus {
     outline: 2px solid ${(props) => props.theme.colors.black};
@@ -91,6 +96,7 @@ export const CheckboxContainer = styled.div`
   justify-content: flex-start;
   gap: 8px;
   padding-left: 20px;
+  margin-bottom: 8px;
 
   position: relative;
 

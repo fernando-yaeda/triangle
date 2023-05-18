@@ -2,15 +2,16 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   min-height: 620px;
-  width: 460px;
+  width: 416px;
 
-  margin-top: 100px;
-  padding: 18px 30px;
+  margin-top: 20px;
+  padding: 28px 28px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  flex-shrink: 0;
 
   gap: 16px;
 

@@ -58,7 +58,7 @@ export const Button = styled.button<ButtonProps>`
     position: relative;
 
     img {
-      height: 20px;
+      height: 18px;
       position: absolute;
       left: 16px;
     }

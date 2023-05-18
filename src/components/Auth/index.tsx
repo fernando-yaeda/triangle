@@ -24,16 +24,16 @@ export default function AuthContainer({
       {icon && icon}
 
       <Text variant="displayMd">{title}</Text>
-      <Text color="darkGrey" variant="textMdRegular">
+      <Text color="darkGrey" variant="textSmRegular">
         {subtitle}
       </Text>
 
       <>
-        <Button width="100%" variant="whiteAndGrey">
+        <Button width="100%" variant="whiteAndGrey" fontVariant="textSm">
           <img src={googleLogo} alt="google logo" />
           Sign in with Google
         </Button>
-        <Button width="100%" variant="whiteAndGrey">
+        <Button width="100%" variant="whiteAndGrey" fontVariant="textSm">
           <img src={facebookLogo} alt="facebook logo" />
           Sign in with Facebook
         </Button>
