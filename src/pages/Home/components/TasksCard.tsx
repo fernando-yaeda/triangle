@@ -125,8 +125,7 @@ export function TasksCard() {
           <Image src={TasksImage} alt="tasks" />
           <Text variant="headingSm">No tasks found</Text>
           <Text variant="textSmRegular" color="darkGrey">
-            Click to add{" "}
-            <span onClick={() => setIsModalOpen(true)}>New Task</span>
+            Click to add <a onClick={() => setIsModalOpen(true)}>New Task</a>
           </Text>
         </>
       )}
