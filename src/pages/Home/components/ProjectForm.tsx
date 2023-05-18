@@ -10,6 +10,10 @@ import {
   Label,
 } from "../../../components/Auth/Forms/styles";
 import { Button } from "../../../components/Button";
+import { useToken } from "../../../hooks/useToken";
+import projectService, {
+  CreateProjectParams,
+} from "../../../services/projectService";
 
 const projectFormSchema = z.object({
   title: z.string().nonempty("Project title should not be empty"),
@@ -33,15 +37,16 @@ export default function ProjectForm({ closeModal }: ProjectFormProps) {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitSuccessful },
   } = useForm<ProjectFormdata>({
     resolver: zodResolver(projectFormSchema),
   });
   const queryClient = useQueryClient();
+  const token = useToken();
 
   const mutation = useMutation({
-    mutationFn: async (createProjectBody) => {
-      // return await projectService.create(createProjectBody, token);
+    mutationFn: async (createProjectBody: CreateProjectParams) => {
+      return await projectService.create(createProjectBody, token);
     },
     onSuccess: () => {
       toast.success("You have successfully created a project!");
@@ -62,7 +67,7 @@ export default function ProjectForm({ closeModal }: ProjectFormProps) {
       description: data.description ?? null,
     };
 
-    mutation.mutate();
+    mutation.mutate(createProjectBody);
   };
 
   return (
@@ -80,20 +85,14 @@ export default function ProjectForm({ closeModal }: ProjectFormProps) {
       <Label>Invite Members</Label>
       <Input {...register("members")} placeholder="Insert members to invite" />
 
-      {isSubmitting ? (
-        <Button
-          width="100%"
-          type="submit"
-          disabled={true}
-          variant="whiteAndGrey"
-        >
-          Create
-        </Button>
-      ) : (
-        <Button width="100%" disabled={true} variant="whiteAndGrey">
-          Create
-        </Button>
-      )}
+      <Button
+        type="submit"
+        width="100%"
+        disabled={isSubmitSuccessful}
+        variant="blackAndWhite"
+      >
+        Create
+      </Button>
     </Form>
   );
 }
