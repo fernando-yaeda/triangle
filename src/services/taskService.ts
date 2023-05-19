@@ -32,6 +32,14 @@ async function create(
   return response.data;
 }
 
+async function remove(id: number, token: string | null): Promise<void> {
+  return await api.delete(`/tasks/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
 async function getTasks(
   token: string | null,
   { search, status, sortBy, orderBy }: taskQuery
@@ -70,6 +78,7 @@ async function updateStatus(
 
 const taskService = {
   create,
+  remove,
   getTasks,
   updateStatus,
 };
