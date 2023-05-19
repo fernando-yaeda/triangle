@@ -81,7 +81,12 @@ export default function Navbar() {
         {navbarItems &&
           navbarItems.map((item) => {
             return (
-              <NavItem href={item.href} icon={item.icon} name={item.name} />
+              <NavItem
+                key={item.href}
+                href={item.href}
+                icon={item.icon}
+                name={item.name}
+              />
             );
           })}
       </S.Navbar>
