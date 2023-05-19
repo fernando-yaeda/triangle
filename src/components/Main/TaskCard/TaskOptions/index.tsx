@@ -51,7 +51,7 @@ export function TaskOptions({ taskId }: TaskOptionsProps) {
         </Text>
       </DropdownItem>
 
-      <DropdownItem onClick={handleDeleteTask} disabled={isLoading}>
+      <DropdownItem onClick={handleDeleteTask}>
         <Trash size={20} color="#5c5f62" weight="bold" />
         <Text type="p" width="80px" variant="textXs">
           Delete Task
@@ -60,3 +60,4 @@ export function TaskOptions({ taskId }: TaskOptionsProps) {
     </Dropdown>
   );
 }
+//TODO add disable
