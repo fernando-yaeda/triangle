@@ -13,6 +13,7 @@ export const theme = {
   borders: {
     default:
       "rgba(0, 0, 0, 0.05) 0px 4px 2px 0px, rgba(0, 0, 0, 0.1) 0px 0px 0px 1px;",
+    dropdown: "rgba(0, 0, 0, 0.1) 4px 4px 12px 0px;",
   },
   fontVariants: {
     displayMd: {
