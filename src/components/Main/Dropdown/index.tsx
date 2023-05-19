@@ -100,12 +100,10 @@ const DropdownMenu = styled.div<{ isOpen: boolean }>`
   transition: ${(props) => (props.isOpen ? "all 0.5s" : "all 0.2s")};
 `;
 
-export const DropdownItem = styled.button`
+export const DropdownItem = styled.div`
   border: none;
   width: 100%;
   height: 100%;
-
-  text-align: start;
 
   display: flex;
   justify-content: flex-start;
