@@ -1,4 +1,4 @@
-import { CalendarBlank, DotsThree, Tag } from "@phosphor-icons/react";
+import { CalendarBlank, Tag } from "@phosphor-icons/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
@@ -8,6 +8,7 @@ import { Text } from "../../../components/Text";
 import { useToken } from "../../../hooks/useToken";
 import taskService from "../../../services/taskService";
 import { Checkbox } from "../../Checkbox";
+import { TaskOptions } from "./TaskOptions";
 import * as S from "./styles";
 dayjs.extend(utc);
 
@@ -73,8 +74,8 @@ export function TaskCard({ id, title, dueDate }: TaskCardProps) {
             </Text>
           </S.Info>
         </S.Details>
+        <TaskOptions taskId={id} />
       </S.Container>
-      <DotsThree size={36} color="#5C5F62" weight="bold" />
     </S.Container>
   );
 }
