@@ -9,14 +9,14 @@ import {
   UserCirclePlus,
 } from "@phosphor-icons/react";
 import useAuth from "../../../../hooks/useAuth/useAuth";
-import { DropdownItem, MenuItem } from "./MenuItem";
+import { Dropdown, DropdownItem } from "../../Dropdown";
 import * as S from "./styles";
 
 export function Menu() {
   const { logout } = useAuth();
   return (
     <S.Container>
-      <MenuItem icon={<Plus size={20} weight="bold" />}>
+      <Dropdown icon={<Plus size={20} weight="bold" />}>
         <DropdownItem>
           <PlusCircle size={28} color="#6F47EB" />
           Create Task
@@ -33,9 +33,9 @@ export function Menu() {
           <PlusCircle size={28} color="#6F47EB" />
           Create Timeline
         </DropdownItem>
-      </MenuItem>
+      </Dropdown>
 
-      <MenuItem icon={<Bell size={24} weight="bold" />}>
+      <Dropdown icon={<Bell size={24} weight="bold" />}>
         <DropdownItem>
           <CheckCircle size={28} color="#5C5F62" />
           Completed Task
@@ -52,9 +52,9 @@ export function Menu() {
           <CheckCircle size={28} color="#5C5F62" />
           Completed Task
         </DropdownItem>
-      </MenuItem>
+      </Dropdown>
 
-      <MenuItem icon={<UserCircle size={28} color="#5C5F62" />}>
+      <Dropdown icon={<UserCircle size={28} color="#5C5F62" />}>
         <DropdownItem>
           <UserCircle size={28} color="#5C5F62" />
           My Profile
@@ -71,7 +71,7 @@ export function Menu() {
           <SignOut size={28} color="#5C5F62" />
           Logout
         </DropdownItem>
-      </MenuItem>
+      </Dropdown>
     </S.Container>
   );
 }
