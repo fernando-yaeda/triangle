@@ -1,10 +1,10 @@
 import { DotsSixVertical } from "@phosphor-icons/react";
-import { ReactNode } from "react";
+import { HTMLAttributes, ReactNode } from "react";
 import { Button } from "../../Button";
 import { Text } from "../../Text";
 import * as S from "./styles";
 
-interface HorizontalCardProps {
+type HorizontalCardProps = {
   title: string;
   subtitle: string;
   buttonIcon?: ReactNode;
@@ -13,7 +13,7 @@ interface HorizontalCardProps {
   iconFirst?: boolean;
   hasContent?: boolean;
   children?: ReactNode;
-}
+} & HTMLAttributes<HTMLDivElement>;
 
 export function HorizontalCard({
   title,
@@ -24,13 +24,16 @@ export function HorizontalCard({
   iconFirst = true,
   children,
   hasContent,
+  ...rest
 }: HorizontalCardProps) {
   return (
-    <S.Container>
+    <S.Container {...rest}>
       <S.Header>
         <S.TextWrapper>
-          <Text variant="textLg">{title}</Text>
-          <Text variant="textSmRegular" color="darkGrey">
+          <Text type="p" variant="textLg">
+            {title}
+          </Text>
+          <Text type="p" variant="textSmRegular" color="darkGrey">
             {subtitle}
           </Text>
         </S.TextWrapper>
