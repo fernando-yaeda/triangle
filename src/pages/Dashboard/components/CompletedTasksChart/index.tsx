@@ -34,7 +34,7 @@ export const data = {
 
 const options = {
   responsive: true,
-  aspectRatio: 3,
+  maintainAspectRatio: false,
   scales: {
     x: {
       border: { display: false },
@@ -43,7 +43,7 @@ const options = {
       },
     },
     y: {
-      ticks: { maxTicksLimit: 5 },
+      ticks: { maxTicksLimit: 4 },
       border: { display: false },
       grid: {
         display: false,
@@ -96,8 +96,20 @@ export function CompletedTasksChart() {
   }, []);
 
   return (
-    <div style={{ height: "100%", width: "100%" }}>
-      <Chart ref={chartRef} type="line" data={chartData} options={options} />
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        position: "relative",
+      }}
+    >
+      <Chart
+        ref={chartRef}
+        type="line"
+        data={chartData}
+        options={options}
+        style={{ maxWidth: "100%" }}
+      />
     </div>
   );
 }

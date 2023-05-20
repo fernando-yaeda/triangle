@@ -6,6 +6,7 @@ export function CompletedTasksCard() {
     <HorizontalCard
       title="Total tasks completed"
       subtitle="Tasks completed in last 7 days"
+      style={{ flex: "1 1 632px" }}
     >
       <CompletedTasksChart />
     </HorizontalCard>
