@@ -32,6 +32,7 @@ export function ProjectsCard() {
       buttonText="Project"
       buttonOnClick={() => setIsModalOpen(true)}
       hasContent={data && data.length > 0 && true}
+      style={{ width: "100%" }}
     >
       <ProjectModal
         isOpen={isModalOpen}
