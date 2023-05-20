@@ -10,13 +10,16 @@ export const Container = styled.div`
 
   position: sticky;
   top: 0;
-  flex-shrink: 0;
 
   z-index: 1;
 
-  padding: 0px 92px;
+  padding: 20px 72px;
 
   background-color: ${(props) => props.theme.colors.white};
 
   border-bottom: 1px solid ${(props) => props.theme.colors.mediumGrey};
+
+  @media (max-width: 1040px) {
+    padding: 20px 40px;
+  }
 `;
