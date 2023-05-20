@@ -3,8 +3,6 @@ import { theme } from "../../../styles/theme";
 
 export const Container = styled.div`
   height: 100%;
-  width: 100%;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,8 +14,9 @@ export const Container = styled.div`
 `;
 
 export const Header = styled.div`
-  height: 80px;
+  height: fit-content;
   width: 100%;
+  padding-top: 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -38,9 +37,7 @@ export const TextWrapper = styled.div`
 `;
 
 export const Content = styled.div`
-  height: auto;
-  width: 100%;
-
+  flex: 1 1 auto;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
