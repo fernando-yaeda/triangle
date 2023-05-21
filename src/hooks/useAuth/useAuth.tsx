@@ -65,7 +65,7 @@ export function AuthProvider({
         return navigate("/home");
       })
       .catch((error) => {
-        if (error.response.data.message) {
+        if (error?.response?.data?.message) {
           return toast.error(error.response.data.message);
         }
         return toast.error(
@@ -90,7 +90,7 @@ export function AuthProvider({
         return navigate("/");
       })
       .catch((error) => {
-        if (error.response.data.message) {
+        if (error?.response?.data?.message) {
           return toast.error(error.response.data.message);
         }
         return toast.error(
