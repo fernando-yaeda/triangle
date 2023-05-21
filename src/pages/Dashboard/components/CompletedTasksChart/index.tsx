@@ -11,6 +11,7 @@ import {
 } from "chart.js";
 import { useEffect, useRef, useState } from "react";
 import { Chart } from "react-chartjs-2";
+import { lineChartOptions } from "./chartOptions";
 import { createFillGradient, createGradient } from "./createGradient";
 
 ChartJS.register(
@@ -23,38 +24,13 @@ ChartJS.register(
   Filler
 );
 
-export const data = {
+const data: ChartData<"bar"> = {
   labels: ["13", "14", "15", "16", "17", "18", "19"],
   datasets: [
     {
       data: [21, 12, 23, 14, 5, 15, 22],
     },
   ],
-};
-
-const options = {
-  responsive: true,
-  maintainAspectRatio: false,
-  scales: {
-    x: {
-      border: { display: false },
-      grid: {
-        display: false,
-      },
-    },
-    y: {
-      ticks: { maxTicksLimit: 4 },
-      border: { display: false },
-      grid: {
-        display: false,
-      },
-    },
-  },
-  plugins: {
-    legend: {
-      display: false,
-    },
-  },
 };
 
 export function CompletedTasksChart() {
@@ -71,8 +47,6 @@ export function CompletedTasksChart() {
     }
 
     const chartData = {
-      type: "line",
-
       ...data,
       datasets: data.datasets.map((dataset) => ({
         ...dataset,
@@ -107,7 +81,7 @@ export function CompletedTasksChart() {
         ref={chartRef}
         type="line"
         data={chartData}
-        options={options}
+        options={lineChartOptions}
         style={{ maxWidth: "100%" }}
       />
     </div>
