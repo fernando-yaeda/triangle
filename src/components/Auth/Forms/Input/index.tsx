@@ -16,11 +16,12 @@ export default function Input({
   type,
   error,
   register,
+  ...rest
 }: InputProps) {
   return (
     <S.InputContainer>
       <S.Label htmlFor={id}>{label}</S.Label>
-      <S.Input id={id} type={type} {...register} />
+      <S.Input id={id} type={type} {...register} {...rest} />
       {error && <S.ErrorText>• {error.message}</S.ErrorText>}
     </S.InputContainer>
   );
