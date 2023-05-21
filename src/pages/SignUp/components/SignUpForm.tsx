@@ -4,50 +4,9 @@ import { z } from "zod";
 import * as S from "../../../components/Auth/Forms/styles";
 import { Button } from "../../../components/Button";
 import useAuth from "../../../hooks/useAuth/useAuth";
+import { signUpFormSchema } from "../../../schemas/SignUpSchema";
 
-const signInFormSchema = z.object({
-  firstName: z
-    .string()
-    .nonempty("first name should not be empty")
-    .transform((name) => {
-      return name
-        .trim()
-        .split(" ")
-        .map((word) => {
-          return word[0].toUpperCase() + word.slice(1);
-        })
-        .join(" ");
-    }),
-  lastName: z
-    .string()
-    .nonempty("last name should not be empty")
-    .transform((name) => {
-      return name
-        .trim()
-        .split(" ")
-        .map((word) => {
-          return word[0].toUpperCase() + word.slice(1);
-        })
-        .join(" ");
-    }),
-  username: z
-    .string()
-    .nonempty("username field should not be empty")
-    .min(6, "username must be longet than 6 characters")
-    .max(16, "username must be shorter than 16 characters"),
-  email: z
-    .string()
-    .nonempty("email field should not be empty")
-    .email("email field should have a valid email address")
-    .toLowerCase(),
-  password: z.string().nonempty("password field should not be empty"),
-  terms: z.literal<boolean>(true, {
-    errorMap: () => ({ message: "You must accept the terms and conditions" }),
-  }),
-  offer: z.boolean(),
-});
-
-type SignUpFormData = z.infer<typeof signInFormSchema>;
+type SignUpFormData = z.infer<typeof signUpFormSchema>;
 
 export default function SignUpForm() {
   const { signUp, loading } = useAuth();
@@ -57,7 +16,7 @@ export default function SignUpForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<SignUpFormData>({
-    resolver: zodResolver(signInFormSchema),
+    resolver: zodResolver(signUpFormSchema),
   });
 
   const handleSubmitData = async (data: SignUpFormData) => {

@@ -1,28 +1,21 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import Input from "../../../components/Auth/Forms/Input";
 import * as S from "../../../components/Auth/Forms/styles";
 import { Button } from "../../../components/Button";
 import useAuth from "../../../hooks/useAuth/useAuth";
+import { signInFormSchema } from "../../../schemas/SignInSchema";
 
-const signInFormSchema = z.object({
-  email: z
-    .string()
-    .nonempty("email field should not be empty")
-    .email("email field should have a valid email address")
-    .toLowerCase(),
-  password: z.string().nonempty("password field should not be empty"),
-});
-
-export type SignInFormData = z.infer<typeof signInFormSchema>;
+type SignInFormData = z.infer<typeof signInFormSchema>;
 
 export default function SignInForm() {
-  const { signIn, loading } = useAuth();
+  const { signIn } = useAuth();
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<SignInFormData>({
     resolver: zodResolver(signInFormSchema),
   });
@@ -33,38 +26,30 @@ export default function SignInForm() {
 
   return (
     <S.Form onSubmit={handleSubmit(handleSubmitData)}>
-      <S.Label htmlFor="email">Email Address</S.Label>
-      <S.Input
-        {...register("email")}
+      <Input
         id="email"
-        placeholder="Email Address"
+        label="Email Address"
         type="email"
+        placeholder="Email Address"
+        register={register("email")}
+        error={errors.email}
       />
-      {errors.email && <S.ErrorText>• {errors.email.message}</S.ErrorText>}
-      <S.Label htmlFor="password">Password</S.Label>
-      <S.Input
-        {...register("password")}
+      <Input
         id="password"
+        label="Password"
         placeholder="Password"
         type="password"
-      ></S.Input>
-      {errors.password && (
-        <S.ErrorText>• {errors.password.message}</S.ErrorText>
-      )}
-      {loading ? (
-        <Button
-          disabled={loading}
-          variant="whiteAndGrey"
-          type="submit"
-          width="100%"
-        >
-          Login
-        </Button>
-      ) : (
-        <Button type="submit" width="100%">
-          Login
-        </Button>
-      )}
+        register={register("password")}
+        error={errors.password}
+      />
+      <Button
+        type="submit"
+        width="100%"
+        disabled={isSubmitting}
+        onClick={() => console.log(isSubmitting)}
+      >
+        Login
+      </Button>
     </S.Form>
   );
 }
