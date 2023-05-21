@@ -6,7 +6,7 @@ import {
   Chat,
   House,
   SquaresFour,
-  Users,
+  StackSimple,
 } from "@phosphor-icons/react";
 import { ReactNode } from "react";
 import useSidebar from "../../../hooks/useSidebar";
@@ -33,15 +33,15 @@ const navbarItems: NavItem[] = [
   },
 
   {
-    href: "/teams",
-    icon: <Users size={24} weight="bold" />,
-    name: "Teams",
+    href: "/projects",
+    icon: <Cards size={24} weight="bold" />,
+    name: "Projects",
   },
 
   {
-    href: "/boards",
-    icon: <Cards size={24} weight="bold" />,
-    name: "Boards",
+    href: "/tasks",
+    icon: <StackSimple size={24} weight="bold" />,
+    name: "Tasks",
   },
 
   {
