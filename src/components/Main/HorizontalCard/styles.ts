@@ -16,7 +16,7 @@ export const Container = styled.div`
 export const Header = styled.div`
   height: fit-content;
   width: 100%;
-  padding-top: 16px;
+  padding: 16px 0px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -37,7 +37,7 @@ export const TextWrapper = styled.div`
 `;
 
 export const Content = styled.div`
-  flex: 1 1 auto;
+  width: 100%;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
