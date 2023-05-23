@@ -40,19 +40,10 @@ export const signUpFormSchema = z.object({
     .nonempty("password field should not be empty")
     .min(6, "password must be longer than 6 characters")
     .max(16, "password must be shorter than 16 characters")
-    .regex(
-      /(?=.*\d)$/,
-      "password must contain at least one digit between [0-9]"
-    )
-    .regex(
-      /(?=.*[a-z])$/,
-      "password must contain at least one lowercase letter"
-    )
-    .regex(
-      /(?=.*[A-Z])$/,
-      "password must contain at least one uppercase letter"
-    )
-    .regex(/(?![.\n])$/, "password must not contain escaped characters"),
+    .regex(/(?=.*\d)/, "password must contain at least one digit between [0-9]")
+    .regex(/(?=.*[a-z])/, "password must contain at least one lowercase letter")
+    .regex(/(?=.*[A-Z])/, "password must contain at least one uppercase letter")
+    .regex(/(?![.\n])/, "password must not contain escaped characters"),
   terms: z.literal<boolean>(true, {
     errorMap: () => ({ message: "You must accept the terms and conditions" }),
   }),
