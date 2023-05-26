@@ -2,13 +2,14 @@ import {
   ArcElement,
   ChartData,
   Chart as ChartJS,
+  DoughnutController,
   Legend,
   Tooltip,
 } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import { doughnutChartOptions } from "./chartOptions";
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(DoughnutController, ArcElement, Tooltip, Legend);
 
 const data: ChartData<"doughnut"> = {
   labels: ["Completed", "In Progress", "Blocked", "Pending"],

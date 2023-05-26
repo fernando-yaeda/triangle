@@ -4,6 +4,7 @@ import {
   Chart as ChartJS,
   Filler,
   Legend,
+  LineController,
   LineElement,
   LinearScale,
   PointElement,
@@ -15,6 +16,7 @@ import { lineChartOptions } from "./chartOptions";
 import { createFillGradient, createGradient } from "./createGradient";
 
 ChartJS.register(
+  LineController,
   CategoryScale,
   LinearScale,
   PointElement,
